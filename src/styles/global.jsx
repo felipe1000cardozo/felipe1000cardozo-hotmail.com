@@ -41,7 +41,7 @@ export default createGlobalStyle`
 :root{
      --primary-color:#0375B4;
      --secoundary-color:#DFDCE3; 
-     --third-color: #279FE1
+     --third-color: #279FE1;
      --text-color: #fafafa;
   }
 `;
