@@ -13,8 +13,9 @@ export default createGlobalStyle`
  }
  body{
    font-size: 14px;
-   background-color: #fff;
+   background-color: var(--secoundary-color);
    -webkit-font-smoothing: antialiased !important;
+   
  }
  body, input, button{
    color: #222;
@@ -30,7 +31,7 @@ export default createGlobalStyle`
  }
  #root{
      width: 100%;
-     max-width: 1440px;
+     max-width: 1114px;
      margin: 0 auto;
  }
  ::placeholder{
@@ -42,6 +43,7 @@ export default createGlobalStyle`
      --primary-color:#0375B4;
      --secoundary-color:#DFDCE3; 
      --third-color: #279FE1;
+     --four-color:#fff;
      --text-color: #fafafa;
   }
 `;
