@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Stock from "./pages/Stock";
 import AdminPainel from "./pages/AdminPainel";
+import NotFound from "./pages/NotFound";
 
 const Routes = () => {
   return (
@@ -19,6 +20,7 @@ const Routes = () => {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/stock" component={Stock} />
         <Route exact path="/admin" component={AdminPainel} />
+        <Route exact path="*" component={NotFound} />
       </Switch>
       <Footer />
     </BrowserRouter>
