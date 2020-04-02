@@ -2,19 +2,24 @@ import React from "react";
 import { Header, Place, Contact } from "./styles";
 import { FaMapMarkerAlt, FaWhatsapp, FaPhone } from "react-icons/fa";
 
+import configInfos from "../../../configInfos.json";
+
 const HeaderMenu = () => {
+  const { endereco, telefone1, telefone2 } = configInfos;
   return (
     <Header>
       <Place>
-        <FaMapMarkerAlt color="#fff" size="20px" />
-        <p>Rua Francisco Nappi, 1419 - ap 06</p>
+        <FaMapMarkerAlt color="#fff" size="20" />
+        <p>
+          Rua {endereco.rua}, {endereco.numero} {endereco.complemento}
+        </p>
       </Place>
 
       <Contact>
-        <FaWhatsapp color="#fff" size="20px" />
-        <p>(48)99999-9999</p>
-        <FaPhone color="#fff" size="20px" />
-        <p>(48)33333-3333</p>
+        <FaPhone color="#fff" size="17" />
+        <a href={`tel:${telefone1}`}>{telefone1}</a>
+        <FaWhatsapp color="#fff" size="20" />
+        <a href={`tel:${telefone2}`}>{telefone2}</a>
       </Contact>
     </Header>
   );

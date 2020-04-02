@@ -1,0 +1,13 @@
+{
+  "nome": "Minha Loja",
+  "telefone1": "(33)3333-3333",
+  "telefone2": "(99)99999-9999",
+  "endereco": {
+    "rua": "Francisco Nappi",
+    "numero": "1419",
+    "complemento": "- Ap 06",
+    "cidade": "São José",
+    "bairro": "Areias",
+    "uf": "SC"
+  }
+}
