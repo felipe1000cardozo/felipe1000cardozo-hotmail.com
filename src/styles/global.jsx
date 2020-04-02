@@ -1,6 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+  :root{
+       --primary-color:#0375B4;
+       --secoundary-color:#DFDCE3; 
+       --third-color: #279FE1;
+       --four-color:#fff;
+       --text-color: #fafafa;
+    }
  *{
    margin: 0;
    padding: 0;
@@ -38,11 +45,4 @@ export default createGlobalStyle`
     opacity: 0.8;
     font-weight:300;
 }
-:root{
-     --primary-color:#0375B4;
-     --secoundary-color:#DFDCE3; 
-     --third-color: #279FE1;
-     --four-color:#fff;
-     --text-color: #fafafa;
-  }
 `;
