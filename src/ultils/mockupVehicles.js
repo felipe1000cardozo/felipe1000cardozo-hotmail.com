@@ -1,7 +1,7 @@
 const vehicles = [
   {
     id: 1,
-    model: "ybr",
+    model: "YBR",
     brand: "yamaha",
     price: 11000,
     year: 2015,
