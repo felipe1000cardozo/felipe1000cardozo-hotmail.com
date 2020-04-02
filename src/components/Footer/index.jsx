@@ -1,10 +1,17 @@
 import React from "react";
+import { Foot, Path, CompanyInfo } from "./styles";
 
 const Footer = () => {
   return (
-    <div>
-      <h1>Footer</h1>
-    </div>
+    <Foot>
+      <Path>
+        <h4>Vehicles shop</h4>
+      </Path>
+      <CompanyInfo>
+        <p>Todos os direitos Reservados </p>
+        <p>A&F Desenvolvimento</p>
+      </CompanyInfo>
+    </Foot>
   );
 };
 

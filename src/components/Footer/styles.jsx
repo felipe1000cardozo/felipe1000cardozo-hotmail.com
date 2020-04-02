@@ -1,48 +1,37 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
+export const Foot = styled.div`
   display: flex;
   max-width: 1114px;
-  height: 40px;
-
-  p,
-  a {
-    color: #fff;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 7px;
-  }
+  height: 110px;
+  color: var(--four-color);
 `;
-
-export const Place = styled.div`
+export const Path = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 50%;
-  padding-left: 70px;
   background-color: var(--primary-color);
   position: relative;
   &:after {
     content: "";
     height: 100%;
-    width: 50px;
+    width: 130px;
     background-color: inherit;
-    right: -21px;
+    right: -65px;
     position: absolute;
     z-index: 1;
     transform: skewX(230deg);
   }
 `;
 
-export const Contact = styled.div`
+export const CompanyInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 115px;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 20px;
+  justify-content: center;
   width: 50%;
   background-color: var(--third-color);
   box-shadow: inset 0px 4px 4px var(--primary-color);
-  a {
-    display: block;
-  }
 `;

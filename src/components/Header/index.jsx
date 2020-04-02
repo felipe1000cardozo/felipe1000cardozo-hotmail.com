@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <Fragment>
       <HeaderMenu />
-      <Menu/>
+      <Menu />
     </Fragment>
   );
 };
