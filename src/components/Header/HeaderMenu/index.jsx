@@ -18,6 +18,7 @@ const HeaderMenu = () => {
       <Contact>
         <FaPhone color="#fff" size="17" />
         <a href={`tel:${telefone1}`}>{telefone1}</a>
+
         <FaWhatsapp color="#fff" size="20" />
         <a href={`tel:${telefone2}`}>{telefone2}</a>
       </Contact>
