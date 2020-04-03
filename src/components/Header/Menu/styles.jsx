@@ -4,7 +4,9 @@ export const MainMenu = styled.div`
   display: flex;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0px 2px 5px 0px var(--secoundary-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  z-index: 3;
 `;
 
 export const Image = styled.div`

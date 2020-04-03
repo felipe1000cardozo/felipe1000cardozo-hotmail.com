@@ -6,8 +6,10 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaRegDotCircle,
-  FaRegCircle
+  FaRegCircle,
 } from "react-icons/fa";
+
+import { SliderStyled } from "./styles";
 
 const Slider = () => {
   const [indexImg, setIndexImg] = useState(0);
@@ -18,15 +20,25 @@ const Slider = () => {
       setIndexImg(indexImg + 1);
     }
   };
-
-  setTimeout(nextIndex, 300000);
+  const backIndex = () => {
+    if (indexImg === 0) {
+      setIndexImg(sliderInfo.length - 1);
+    } else {
+      setIndexImg(indexImg - 1);
+    }
+  };
+  setTimeout(nextIndex, 3000);
   return (
-    <div>
+    <SliderStyled>
       <img src={sliderInfo[indexImg].img} alt="" />
-      <h3>{sliderInfo[indexImg].legend}</h3>
-      <FaChevronLeft size="45" />
-      <FaChevronRight size="45" onClick={() => nextIndex()} />
-      <div>
+      <h3 className="subtitle">{sliderInfo[indexImg].legend}</h3>
+      <div className="arrowLeft">
+        <FaChevronLeft size="45" onClick={() => backIndex()} />
+      </div>
+      <div className="arrowRight">
+        <FaChevronRight size="45" onClick={() => nextIndex()} />
+      </div>
+      <div className="dots">
         {sliderInfo.map((img, index) => {
           return indexImg !== index ? (
             <FaRegCircle onClick={() => setIndexImg(index)} />
@@ -35,7 +47,7 @@ const Slider = () => {
           );
         })}
       </div>
-    </div>
+    </SliderStyled>
   );
 };
 
