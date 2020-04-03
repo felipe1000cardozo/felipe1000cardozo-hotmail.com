@@ -33,33 +33,30 @@ const Slider = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       nextIndex();
-    }, 5000);
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [indexImg]);
+  }, [indexImg, nextIndex]);
 
   return (
-    <>
-      {indexImg}
-      <SliderStyled>
-        <img src={sliderInfo[indexImg].img} alt="" />
-        <h3 className="subtitle">{sliderInfo[indexImg].legend}</h3>
-        <div className="arrowLeft">
-          <FaChevronLeft size="45" onClick={() => backIndex()} />
-        </div>
-        <div className="arrowRight">
-          <FaChevronRight size="45" onClick={() => nextIndex()} />
-        </div>
-        <div className="dots">
-          {sliderInfo.map((img, index) => {
-            return indexImg !== index ? (
-              <FaRegCircle onClick={() => setIndexImg(index)} />
-            ) : (
-              <FaRegDotCircle />
-            );
-          })}
-        </div>
-      </SliderStyled>
-    </>
+    <SliderStyled>
+      <img src={sliderInfo[indexImg].img} alt="" />
+      <h3 className="subtitle">{sliderInfo[indexImg].legend}</h3>
+      <div className="arrowLeft">
+        <FaChevronLeft size="45" onClick={() => backIndex()} />
+      </div>
+      <div className="arrowRight">
+        <FaChevronRight size="45" onClick={() => nextIndex()} />
+      </div>
+      <div className="dots">
+        {sliderInfo.map((img, index) => {
+          return indexImg !== index ? (
+            <FaRegCircle onClick={() => setIndexImg(index)} />
+          ) : (
+            <FaRegDotCircle />
+          );
+        })}
+      </div>
+    </SliderStyled>
   );
 };
 
