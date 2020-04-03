@@ -1,12 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Slider from "../../components/Slider";
 
 const Home = () => {
-  return (
-    <Fragment>
-      <Slider />
-    </Fragment>
-  );
+  return <Slider />;
 };
 
 export default Home;
