@@ -1,11 +1,15 @@
-import React, { Fragment } from "react";
-import Slider from "../../components/Slider";
+import React from "react";
+import Card from "../../components/Card";
+import Vehicles from "../../ultils/mockupVehicles";
+import { Cards } from "./styles";
 
 const Home = () => {
   return (
-    <Fragment>
-      <Slider />
-    </Fragment>
+    <Cards>
+      {Vehicles.map(vehicle => {
+        return <Card vehicle={vehicle} />;
+      })}
+    </Cards>
   );
 };
 

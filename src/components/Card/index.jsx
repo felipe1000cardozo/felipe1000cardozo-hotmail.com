@@ -1,6 +1,6 @@
 import React from "react";
 import { CarCard, Image, CardInfos, Price } from "./styles";
-
+import { Link } from "react-router-dom";
 import ButtonComponent from "../ButtonComponent";
 
 const Card = ({ vehicle }) => {
@@ -17,7 +17,9 @@ const Card = ({ vehicle }) => {
       </CardInfos>
       <Price>R$: {vehicle.price}</Price>
 
-      <ButtonComponent value="Ver Mais" />
+      <Link to={"/stock"}>
+        <ButtonComponent value="Ver Mais" />
+      </Link>
     </CarCard>
   );
 };
