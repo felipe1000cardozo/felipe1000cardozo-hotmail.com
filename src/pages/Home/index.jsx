@@ -1,16 +1,8 @@
 import React from "react";
-import Card from "../../components/Card";
-import Vehicles from "../../ultils/mockupVehicles";
-import { Cards } from "./styles";
+import Slider from "../../components/Slider";
 
 const Home = () => {
-  return (
-    <Cards>
-      {Vehicles.map(vehicle => {
-        return <Card vehicle={vehicle} />;
-      })}
-    </Cards>
-  );
+  return <Slider />;
 };
 
 export default Home;

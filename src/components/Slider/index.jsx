@@ -18,6 +18,7 @@ const Slider = () => {
       setIndexImg(indexImg + 1);
     }
   };
+
   setTimeout(nextIndex, 300000);
   return (
     <div>
