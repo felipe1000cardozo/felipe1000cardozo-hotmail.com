@@ -8,7 +8,6 @@ export const CarCard = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 15px;
   h3 {
     display: flex;
     justify-content: center;
