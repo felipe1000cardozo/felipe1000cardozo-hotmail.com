@@ -19,7 +19,7 @@ export default createGlobalStyle`
  }
  body{
    font-size: 14px;
-   background-color: var(--secoundary-color);
+   background-color: rgb(250,250,250);
    -webkit-font-smoothing: antialiased !important;
    
  }
@@ -36,9 +36,12 @@ export default createGlobalStyle`
    text-decoration: none;
  }
  #root{
-     width: 100%;
-     max-width: 1114px;
-     margin: 0 auto;
+    width: 100%;
+    max-width: 1114px;
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(115,115,115,1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(115,115,115,1);
+    box-shadow: 0px 0px 10px 0px rgba(115,115,115,1);
  }
  ::placeholder{
     color: var(--text-color);
