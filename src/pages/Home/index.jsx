@@ -4,6 +4,7 @@ import Slider from "../../components/Slider";
 import CardsContainer from "../../components/CardsContainer";
 
 import vehicles from "../../ultils/mockupVehicles";
+import AboutComponent from "../../components/AboutComponent";
 
 let fourVehicles = [];
 
@@ -18,6 +19,7 @@ const Home = () => {
     <Fragment>
       <Slider />
       <CardsContainer vehicles={fourVehicles} />
+      <AboutComponent />
     </Fragment>
   );
 };

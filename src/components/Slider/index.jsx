@@ -6,7 +6,7 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaRegDotCircle,
-  FaRegCircle
+  FaRegCircle,
 } from "react-icons/fa";
 
 import { SliderStyled } from "./styles";
@@ -19,7 +19,6 @@ const Slider = () => {
     } else {
       setIndexImg(indexImg + 1);
     }
-    console.log("next");
   };
   const backIndex = () => {
     if (indexImg === 0) {
@@ -27,7 +26,6 @@ const Slider = () => {
     } else {
       setIndexImg(indexImg - 1);
     }
-    console.log("prev");
   };
 
   useEffect(() => {

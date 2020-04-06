@@ -2,6 +2,7 @@
   "nome": "Minha Loja",
   "telefone1": "(33)3333-3333",
   "telefone2": "(99)99999-9999",
+  "email": "cliente.teste@email.com",
   "endereco": {
     "rua": "Francisco Nappi",
     "numero": "1419",
