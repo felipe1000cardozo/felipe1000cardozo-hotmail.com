@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const MainMenu = styled.div`
   display: flex;
   width: 100%;
-  background-color: #fff;
+  background-color: rgba(250, 250, 250, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: sticky;
+  top: 0;
   z-index: 3;
 `;
 
@@ -35,6 +36,11 @@ export const MenuList = styled.ul`
     margin-right: 40px;
     position: relative;
   }
+  li:hover {
+    border-bottom: 3px solid var(--primary-color);
+    padding-top: 10px;
+  }
+
   a {
     text-decoration: none;
     font-size: 20;
@@ -45,18 +51,5 @@ export const MenuList = styled.ul`
   }
   a:hover {
     color: var(--primary-color);
-  }
-  span {
-    display: none;
-    width: 3px;
-    background: var(--primary-color);
-    position: absolute;
-    top: 130%;
-    width: 70px;
-    height: 3px;
-    left: 6%;
-  }
-  li:hover span {
-    display: inline-block;
   }
 `;

@@ -14,19 +14,19 @@ const AboutComponent = () => {
 
         <div>
           <p>
-            <MdPhone />
+            <MdPhone size="40" />
             {telefone1}
           </p>
           <p>
-            <IoLogoWhatsapp />
+            <IoLogoWhatsapp size="40" />
             {telefone2}
           </p>
           <p>
-            <IoIosMail />
+            <IoIosMail size="40" />
             {email}
           </p>
           <p>
-            <MdLocationOn />
+            <MdLocationOn size="40" />
             Rua {endereco.rua}, {endereco.numero} {endereco.complemento}
           </p>
         </div>
