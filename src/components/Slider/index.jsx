@@ -13,6 +13,7 @@ import { SliderStyled } from "./styles";
 
 const Slider = () => {
   const [indexImg, setIndexImg] = useState(0);
+  // eslint-disable-next-line
   const nextIndex = () => {
     if (indexImg === sliderInfo.length - 1) {
       setIndexImg(0);

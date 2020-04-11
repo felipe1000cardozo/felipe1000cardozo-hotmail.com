@@ -10,6 +10,8 @@ const Button = styled.button`
   font-weight: 500;
   font-size: 14px;
   color: #0375b4;
+  width: fit-content;
+  height: fit-content;
   &:hover {
     background-color: var(--primary-color);
     color: #fff;

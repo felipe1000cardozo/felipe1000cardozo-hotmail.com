@@ -12,8 +12,6 @@ for (let i = 0; i <= 3; i++) {
   fourVehicles[i] = vehicles[i];
 }
 
-console.log(fourVehicles);
-
 const Home = () => {
   return (
     <Fragment>
