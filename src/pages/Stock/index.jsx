@@ -76,7 +76,7 @@ const Stock = () => {
       <h1>Estoque</h1>
       <div>Ordenação</div>
       <select onChange={(e) => setOrder(Number(e.target.value))}>
-        <option disabled selected hidden>
+        <option disabled defaultValue hidden>
           Ordernar por:
         </option>
         <option value={1}>Ano: Maior > Menor</option>

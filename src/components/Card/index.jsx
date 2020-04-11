@@ -2,26 +2,28 @@ import React from "react";
 import { CarCard, Image, CardInfos, Price } from "./styles";
 import { Link } from "react-router-dom";
 import ButtonComponent from "../ButtonComponent";
+import { memo } from "react";
 
 const Card = ({ vehicle }) => {
+  const { id, model, imgs, brand, year, km, price } = vehicle;
   return (
-    <CarCard key={vehicle.id}>
-      <h3>{vehicle.model}</h3>
+    <CarCard key={id}>
+      <h3>{model}</h3>
       <Image>
-        <img src={vehicle.imgs[1]} alt="MOTO" />
+        <img src={imgs[1]} alt="MOTO" />
       </Image>
       <CardInfos>
-        <p>Marca: {vehicle.brand}</p>
-        <p>Ano: {vehicle.year}</p>
-        <p>KM: {vehicle.km}</p>
+        <p>Marca: {brand}</p>
+        <p>Ano: {year}</p>
+        <p>KM: {km}</p>
       </CardInfos>
-      <Price>R$: {vehicle.price}</Price>
+      <Price>R$: {price}</Price>
 
-      <Link to={"/stock"}>
+      <Link to={`/stock/${id}`}>
         <ButtonComponent value="Ver Mais" />
       </Link>
     </CarCard>
   );
 };
 
-export default Card;
+export default memo(Card);

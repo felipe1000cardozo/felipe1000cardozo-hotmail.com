@@ -32,24 +32,19 @@ export const MenuList = styled.ul`
 
   li {
     list-style: none;
-    padding: 8px 10px;
-    margin-right: 40px;
     position: relative;
-  }
-  li:hover {
-    border-bottom: 3px solid var(--primary-color);
-    padding-top: 10px;
   }
 
   a {
+    padding: 20px 24px;
     text-decoration: none;
     font-size: 20;
     font-weight: 500;
     color: #000;
-    margin: 0 20px;
-    padding: 0 4px;
+    display: block;
   }
   a:hover {
     color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
   }
 `;
