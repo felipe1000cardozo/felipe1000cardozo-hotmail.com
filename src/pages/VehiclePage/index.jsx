@@ -4,7 +4,7 @@ import vehicles from "../../ultils/mockupVehicles";
 const VehiclePage = ({ match }) => {
   const vehicle = vehicles[match.params.id - 1];
 
-  const { id, model, imgs, brand, year, km, price, description } = vehicle;
+  const { model, imgs, brand, year, km, price, description } = vehicle;
   return (
     <div>
       <h1>veiculo</h1>

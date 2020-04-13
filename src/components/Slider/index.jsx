@@ -49,9 +49,9 @@ const Slider = () => {
       <div className="dots">
         {sliderInfo.map((img, index) => {
           return indexImg !== index ? (
-            <FaRegCircle onClick={() => setIndexImg(index)} />
+            <FaRegCircle key={index} onClick={() => setIndexImg(index)} />
           ) : (
-            <FaRegDotCircle />
+            <FaRegDotCircle key={index} />
           );
         })}
       </div>
