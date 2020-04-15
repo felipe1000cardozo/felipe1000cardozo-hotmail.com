@@ -1,15 +1,38 @@
 import React, { useState, useEffect } from "react";
 import vehicles from "../../ultils/mockupVehicles";
 import CardsContainer from "../../components/CardsContainer";
+import { FaSearch } from "react-icons/fa";
+
+import Slider from "@material-ui/core/Slider";
+import {
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  Box,
+  Input,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
+
+import { StyledStock } from "./styles";
+import ButtonComponent from "../../components/ButtonComponent";
 
 const Stock = () => {
   const [toShowVehicles, setToShowVehicles] = useState(vehicles);
   const [order, setOrder] = useState(0);
   const [brand, setBrand] = useState("all");
-  const [maxYear, setMaxYear] = useState("");
-  const [minYear, setMinYear] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minPrice, setMinPrice] = useState("");
+  const [search, setSearch] = useState("");
+  const [priceRange, setPriceRange] = React.useState([0, 50000]);
+  const [yearRange, setYearRange] = React.useState([1980, 2021]);
+
+  const handleChangePrice = (event, newValue) => {
+    setPriceRange(newValue);
+  };
+
+  const handleChangeYear = (event, newValue) => {
+    setYearRange(newValue);
+  };
 
   useEffect(() => {
     orderVehicles();
@@ -24,10 +47,10 @@ const Stock = () => {
   const filterVehicles = () => {
     let vehicles2 = [...vehicles];
     vehicles2 = filterByBrand(brand, vehicles2);
-    vehicles2 = filterMinYear(minYear, vehicles2);
-    vehicles2 = filterMaxYear(maxYear, vehicles2);
-    vehicles2 = filterMinPrice(minPrice, vehicles2);
-    vehicles2 = filterMaxPrice(maxPrice, vehicles2);
+    vehicles2 = filterMinYear(yearRange[0], vehicles2);
+    vehicles2 = filterMaxYear(yearRange[1], vehicles2);
+    vehicles2 = filterMinPrice(priceRange[0], vehicles2);
+    vehicles2 = filterMaxPrice(priceRange[1], vehicles2);
     setToShowVehicles([...vehicles2]);
   };
 
@@ -93,77 +116,121 @@ const Stock = () => {
     setToShowVehicles([...vehicles1]);
   };
 
+  const handleChangeOrder = (event) => {
+    setOrder(event.target.value);
+  };
+
+  const handleChangeBrand = (event) => {
+    setBrand(event.target.value);
+  };
+
+  const handleChangeSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
   return (
-    <div>
-      <h1>Estoque</h1>
-      <div>Ordenação</div>
-      <select onChange={(e) => setOrder(Number(e.target.value))}>
-        <option disabled selected hidden>
-          Ordernar por:
-        </option>
-        <option value={1}>Ano: Maior > Menor</option>
-        <option value={2}>Ano: Menor > Maior</option>
-        <option value={3}>Preço: Maior > Menor</option>
-        <option value={4}>Preço: Menor > Maior</option>
-      </select>
-      <form>
-        Filtros
-        <br />
-        <label>Preço: </label>
-        <input
-          type="number"
-          placeholder="Min preço"
-          value={minPrice}
-          onChange={(event) => setMinPrice(Number(event.target.value))}
-        />
-        <input
-          type="number"
-          value={maxPrice}
-          placeholder="Max preço"
-          onChange={(event) => setMaxPrice(Number(event.target.value))}
-        />
-        <br />
-        <label>Ano: </label>
-        <input
-          type="number"
-          placeholder="Min Ano"
-          value={minYear}
-          onChange={(event) => setMinYear(Number(event.target.value))}
-        />
-        <input
-          type="number"
-          value={maxYear}
-          placeholder="Max Ano"
-          onChange={(event) => setMaxYear(Number(event.target.value))}
-        />
-      </form>
+    <StyledStock>
+      <div>
+        <Box
+          border={1}
+          borderColor="grey.500"
+          borderRadius={16}
+          component="nav"
+          m={1}
+        >
+          <span id="filter-tag">FILTROS</span>
+          <div className="sub-container-filters">
+            <div>
+              <InputLabel>Preço:</InputLabel>
+              <Slider
+                value={priceRange}
+                onChange={handleChangePrice}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                max={50000}
+              />
+            </div>
+            <div>
+              <InputLabel>Ano</InputLabel>
+              <Slider
+                value={yearRange}
+                onChange={handleChangeYear}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={1980}
+                max={2021}
+              />
+            </div>
+          </div>
+          <div className="sub-container-filters">
+            <FormControl fullWidth>
+              <InputLabel>Marca</InputLabel>
 
-      <select
-        onChange={(e) => {
-          setBrand(e.target.value);
-          orderVehicles();
-        }}
-      >
-        <option value="all">Todas</option>
-        {allBrands.map((b) => {
-          return (
-            <option value={b} key={b}>
-              {b}
-            </option>
-          );
-        })}
-      </select>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={brand}
+                onChange={handleChangeBrand}
+              >
+                <MenuItem value="all">Todas</MenuItem>
+                {allBrands.map((b) => {
+                  return (
+                    <MenuItem value={b} key={b}>
+                      {b}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <ButtonComponent
+              value="Filtrar"
+              onClick={() => {
+                filterVehicles();
+              }}
+            >
+              filtrar
+            </ButtonComponent>
+          </div>
+        </Box>
 
-      <button
-        onClick={() => {
-          filterVehicles();
-        }}
-      >
-        filtrar
-      </button>
+        <FormControl className="search-container">
+          <div>
+            <InputLabel htmlFor="standard-adornment-password">
+              Pesquisar
+            </InputLabel>
+            <Input
+              id="standard-adornment-password"
+              type="text"
+              value={search}
+              onChange={handleChangeSearch}
+              endAdornment={
+                <InputAdornment position="end">
+                  <FaSearch color="#737373" />
+                </InputAdornment>
+              }
+            />
+          </div>
+        </FormControl>
+      </div>
+      <div className="order">
+        <FormControl>
+          <InputLabel>Ordenar por:</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={order}
+            onChange={handleChangeOrder}
+          >
+            <MenuItem value={3}>Maior preço</MenuItem>
+            <MenuItem value={4}>Menor preço</MenuItem>
+            <MenuItem value={1}>Maior ano</MenuItem>
+            <MenuItem value={2}>Menor ano</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
 
       <CardsContainer vehicles={toShowVehicles} />
-    </div>
+    </StyledStock>
   );
 };
 

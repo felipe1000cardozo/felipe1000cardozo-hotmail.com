@@ -36,12 +36,13 @@ export const MenuList = styled.ul`
   }
 
   a {
-    padding: 20px 24px;
+    padding: 20px 20px;
     text-decoration: none;
     font-size: 20;
     font-weight: 500;
     color: #000;
     display: block;
+    margin: 0 12px;
   }
   a:hover {
     color: var(--primary-color);
