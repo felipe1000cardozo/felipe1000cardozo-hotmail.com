@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import vehicles from "../../ultils/mockupVehicles";
 import CardsContainer from "../../components/CardsContainer";
-import { FaSearch } from "react-icons/fa";
 
+import { FaSearch } from "react-icons/fa";
 import Slider from "@material-ui/core/Slider";
 import {
   InputLabel,
@@ -14,23 +13,38 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 
+import vehicles from "../../ultils/mockupVehicles";
 import { StyledStock } from "./styles";
 import ButtonComponent from "../../components/ButtonComponent";
 
 const Stock = () => {
   const [toShowVehicles, setToShowVehicles] = useState(vehicles);
-  const [order, setOrder] = useState(0);
+  const [order, setOrder] = useState("");
   const [brand, setBrand] = useState("all");
   const [search, setSearch] = useState("");
   const [priceRange, setPriceRange] = React.useState([0, 50000]);
   const [yearRange, setYearRange] = React.useState([1980, 2021]);
 
-  const handleChangePrice = (event, newValue) => {
-    setPriceRange(newValue);
-  };
+  useEffect(() => {
+    console.log(searching());
+    setToShowVehicles(searching());
+    //setFilteredCountries(search());
+    // eslint-disable-next-line
+  }, [search]);
+  //
 
-  const handleChangeYear = (event, newValue) => {
-    setYearRange(newValue);
+  const searching = () => {
+    let filtered = [];
+    if (!search) {
+      filtered = vehicles;
+    } else {
+      filtered = vehicles.filter(
+        (vehicle) =>
+          vehicle.model.toUpperCase().includes(search.toUpperCase()) ||
+          vehicle.brand.toUpperCase().includes(search.toUpperCase())
+      );
+    }
+    return filtered;
   };
 
   useEffect(() => {
@@ -115,18 +129,6 @@ const Stock = () => {
     setToShowVehicles([...vehicles1]);
   };
 
-  const handleChangeOrder = (event) => {
-    setOrder(event.target.value);
-  };
-
-  const handleChangeBrand = (event) => {
-    setBrand(event.target.value);
-  };
-
-  const handleChangeSearch = (event) => {
-    setSearch(event.target.value);
-  };
-
   return (
     <StyledStock>
       <div>
@@ -143,7 +145,9 @@ const Stock = () => {
               <InputLabel>Preço:</InputLabel>
               <Slider
                 value={priceRange}
-                onChange={handleChangePrice}
+                onChange={(e, newValue) => {
+                  setPriceRange(newValue);
+                }}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 max={50000}
@@ -153,7 +157,9 @@ const Stock = () => {
               <InputLabel>Ano</InputLabel>
               <Slider
                 value={yearRange}
-                onChange={handleChangeYear}
+                onChange={(e, newValue) => {
+                  setYearRange(newValue);
+                }}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 min={1980}
@@ -169,7 +175,7 @@ const Stock = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={brand}
-                onChange={handleChangeBrand}
+                onChange={(e) => setBrand(e.target.value)}
               >
                 <MenuItem value="all">Todas</MenuItem>
                 {allBrands.map((b) => {
@@ -194,14 +200,12 @@ const Stock = () => {
 
         <FormControl className="search-container">
           <div>
-            <InputLabel htmlFor="standard-adornment-password">
-              Pesquisar
-            </InputLabel>
+            <InputLabel htmlFor="standard-adornment">Pesquisar</InputLabel>
             <Input
-              id="standard-adornment-password"
+              id="standard-adornment"
               type="text"
               value={search}
-              onChange={handleChangeSearch}
+              onChange={(e) => setSearch(e.target.value)}
               endAdornment={
                 <InputAdornment position="end">
                   <FaSearch color="#737373" />
@@ -218,7 +222,7 @@ const Stock = () => {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={order}
-            onChange={handleChangeOrder}
+            onChange={(e) => setOrder(e.target.value)}
           >
             <MenuItem value={3}>Maior preço</MenuItem>
             <MenuItem value={4}>Menor preço</MenuItem>
