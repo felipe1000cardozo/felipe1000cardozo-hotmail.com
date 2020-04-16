@@ -16,7 +16,6 @@ const Home = () => {
   return (
     <Fragment>
       <Slider />
-      <CardsContainer vehicles={fourVehicles} />
       <AboutComponent />
     </Fragment>
   );

@@ -28,16 +28,14 @@ const CardsContainer = ({
           return <Card vehicle={vehicle} key={vehicle.id} />;
         })}
 
-      {numberOfPages ? (
-        <div className="container-pagination">
-          <Pagination
-            count={numberOfPages}
-            page={currentPage}
-            color="primary"
-            onChange={(e, event) => setCurrentPage(event)}
-          />
-        </div>
-      ) : null}
+      <div className="container-pagination">
+        <Pagination
+          count={numberOfPages}
+          page={currentPage}
+          color="primary"
+          onChange={(e, event) => setCurrentPage(event)}
+        />
+      </div>
     </CardsContainerStyled>
   );
 };
