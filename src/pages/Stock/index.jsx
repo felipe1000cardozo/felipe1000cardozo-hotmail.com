@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CardsContainer from "../../components/CardsContainer";
 
 import { FaSearch } from "react-icons/fa";
 import Slider from "@material-ui/core/Slider";
@@ -14,8 +13,12 @@ import {
 } from "@material-ui/core";
 
 import vehicles from "../../ultils/mockupVehicles";
-import { StyledStock } from "./styles";
+import getBiggestPrice from "../../ultils/getBiggestPrice";
+import getBiggestYear from "../../ultils/getBiggestYear";
+import getLowestYear from "../../ultils/getLowestYear";
+import CardsContainer from "../../components/CardsContainer";
 import ButtonComponent from "../../components/ButtonComponent";
+import { StyledStock } from "./styles";
 
 const Stock = () => {
   const [toShowVehicles, setToShowVehicles] = useState(vehicles);
@@ -24,11 +27,11 @@ const Stock = () => {
   const [search, setSearch] = useState("");
   const [priceRange, setPriceRange] = React.useState([0, 50000]);
   const [yearRange, setYearRange] = React.useState([1980, 2021]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const vehiclesPerPage = 12;
 
   useEffect(() => {
-    console.log(searching());
     setToShowVehicles(searching());
-    //setFilteredCountries(search());
     // eslint-disable-next-line
   }, [search]);
   //
@@ -231,8 +234,12 @@ const Stock = () => {
           </Select>
         </FormControl>
       </div>
-
-      <CardsContainer vehicles={toShowVehicles} />
+      <CardsContainer
+        vehicles={toShowVehicles}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        vehiclesPerPage={vehiclesPerPage}
+      />
     </StyledStock>
   );
 };

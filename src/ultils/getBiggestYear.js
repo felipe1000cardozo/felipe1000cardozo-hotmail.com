@@ -1,4 +1,4 @@
-const getBiggestPrice = (array) => {
+const getBiggestYear = (array) => {
   var biggestYear = array[0].year;
 
   for (let i = 1; i < array.length; ++i) {
