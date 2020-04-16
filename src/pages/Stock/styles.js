@@ -42,6 +42,7 @@ const StyledStock = styled.main`
       display: flex;
       flex-direction: column;
       padding: 12px;
+      z-index: 2;
       .MuiSlider-root {
         color: var(--third-color);
       }
