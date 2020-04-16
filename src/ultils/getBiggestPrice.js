@@ -1,14 +1,12 @@
 const getBiggestPrice = (array) => {
-  var biggestPrice = array[0];
+  var biggestPrice = array[0].price;
 
   for (let i = 1; i < array.length; ++i) {
-    if (array[i] > biggestPrice) {
-      biggestPrice = array[i];
+    if (array[i].price > biggestPrice) {
+      biggestPrice = array[i].price;
     }
   }
   return biggestPrice;
 };
 
-let arr = [10500, 50000, 100000];
-
-console.log(getBiggestPrice(arr));
+export default getBiggestPrice;

@@ -1,14 +1,12 @@
 const getLowestYear = (array) => {
-  var lowestYear = array[0];
+  var lowestYear = array[0].year;
 
   for (let i = 1; i < array.length; ++i) {
-    if (array[i] < lowestYear) {
-      lowestYear = array[i];
+    if (array[i].year < lowestYear) {
+      lowestYear = array[i].year;
     }
   }
   return lowestYear;
 };
 
-let arr = [5, 6, 8, -3];
-
-console.log(getLowestYear(arr));
+export default getLowestYear;

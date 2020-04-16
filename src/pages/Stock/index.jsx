@@ -12,7 +12,6 @@ import {
   Box,
   Input,
   InputAdornment,
-  IconButton,
 } from "@material-ui/core";
 
 import { StyledStock } from "./styles";
