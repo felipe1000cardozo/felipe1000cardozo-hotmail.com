@@ -195,9 +195,7 @@ const Stock = () => {
               onClick={() => {
                 filterVehicles();
               }}
-            >
-              filtrar
-            </ButtonComponent>
+            />
           </div>
         </Box>
 

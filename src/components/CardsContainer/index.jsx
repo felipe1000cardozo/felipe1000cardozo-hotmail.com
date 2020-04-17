@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Pagination } from "@material-ui/lab";
 
 import Card from "../Card";
 import { CardsContainerStyled } from "./styles";
-import { useEffect } from "react";
 
 const CardsContainer = ({
   vehicles,

@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 
 import Slider from "../../components/Slider";
-import CardsContainer from "../../components/CardsContainer";
+import Card from "../../components/Card";
 
 import vehicles from "../../ultils/mockupVehicles";
 import AboutComponent from "../../components/AboutComponent";
+import { Cards } from "./styles";
+import ButtonComponent from "../../components/ButtonComponent";
 
 let fourVehicles = [];
 
@@ -16,6 +18,15 @@ const Home = () => {
   return (
     <Fragment>
       <Slider />
+      <Cards>
+        {fourVehicles.map((vehicle) => {
+          return <Card vehicle={vehicle} key={vehicle.id} />;
+        })}
+        <div>
+          <ButtonComponent value="Ver Mais" />
+        </div>
+      </Cards>
+
       <AboutComponent />
     </Fragment>
   );
