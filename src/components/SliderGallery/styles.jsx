@@ -2,23 +2,25 @@ import styled from "styled-components";
 
 const SliderStyled = styled.div`
   color: var(--primary-color);
-  position: relative;
-  height: 420px;
   background-color: var(--four-color);
+  width: 55%;
+  padding: 24px;
+  .main-img-container {
+    position: relative;
+    height: fit-content;
+  }
   img {
     width: 100%;
-    height: 420px;
-    position: absolute;
+    cursor: zoom-in;
   }
-  .arrowLeft,
-  .arrowRight,
-  .subtitle,
-  .dots-container {
-    position: absolute;
-    z-index: 1;
+  .selected {
+    border: 3px solid var(--third-color);
   }
+
   .arrowLeft,
   .arrowRight {
+    position: absolute;
+    z-index: 2;
     cursor: pointer;
     opacity: 0;
 
@@ -27,16 +29,17 @@ const SliderStyled = styled.div`
       opacity: 1;
     }
   }
+
   .arrowLeft {
     display: flex;
     height: 100%;
     align-items: center;
-    left: 0px;
-    padding: 0 80px 0 56px;
+    left: 0;
+    padding: 0 40px 0 20px;
     background: rgb(255, 255, 255);
     background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.7) 0%,
       rgba(255, 255, 255, 0) 100%
     );
   }
@@ -44,26 +47,29 @@ const SliderStyled = styled.div`
     display: flex;
     height: 100%;
     align-items: center;
-    right: 0px;
-    padding: 0 56px 0 80px;
+    right: 0;
+    padding: 0 20px 0 40px;
     background: rgb(255, 255, 255);
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(0, 0, 0, 0.6) 100%
+      rgba(0, 0, 0, 0.7) 100%
     );
   }
-  .dots-container {
+  .miniature-img-container {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
-    bottom: 22px;
+    padding: 12px 0;
+    img {
+      /* height: 130px; */
+      width: 23%;
+      margin: 0 8px 8px 0;
+      cursor: pointer;
+    }
   }
-  .subtitle {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    bottom: 56px;
+  .miniature-img-container img:nth-child(4n + 1) {
+    margin-left: 0;
   }
 `;
 

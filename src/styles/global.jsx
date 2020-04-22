@@ -39,9 +39,9 @@ export default createGlobalStyle`
     width: 100%;
     max-width: 1114px;
     margin: 0 auto;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(115,115,115,1);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(115,115,115,1);
-    box-shadow: 0px 0px 10px 0px rgba(115,115,115,1);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(180,180,180,1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(180,180,180,1);
+    box-shadow: 0px 0px 10px 0px rgba(180,180,180,1);
  }
  ::placeholder{
     color: var(--text-color);

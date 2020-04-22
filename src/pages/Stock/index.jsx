@@ -28,7 +28,7 @@ const Stock = () => {
   const [priceRange, setPriceRange] = React.useState([0, 50000]);
   const [yearRange, setYearRange] = React.useState([1980, 2021]);
   const [currentPage, setCurrentPage] = useState(1);
-  const vehiclesPerPage = 12;
+  const [vehiclesPerPage, setVehiclesPerPage] = useState(12);
 
   useEffect(() => {
     setToShowVehicles(searching());
@@ -231,7 +231,23 @@ const Stock = () => {
             <MenuItem value={2}>Menor ano</MenuItem>
           </Select>
         </FormControl>
+
+        <FormControl>
+          <InputLabel>Veiculos por página:</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={vehiclesPerPage}
+            onChange={(e) => setVehiclesPerPage(e.target.value)}
+          >
+            <MenuItem value={8}>8</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={24}>24</MenuItem>
+          </Select>
+        </FormControl>
       </div>
+
       <CardsContainer
         vehicles={toShowVehicles}
         currentPage={currentPage}

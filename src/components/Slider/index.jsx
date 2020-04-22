@@ -32,7 +32,7 @@ const Slider = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       nextIndex();
-    }, 5000);
+    }, 5000000);
     return () => clearTimeout(timer);
   }, [indexImg, nextIndex]);
 
@@ -40,18 +40,22 @@ const Slider = () => {
     <SliderStyled>
       <img src={sliderInfo[indexImg].img} alt="" />
       <h3 className="subtitle">{sliderInfo[indexImg].legend}</h3>
-      <div className="arrowLeft">
-        <FaChevronLeft size="45" onClick={() => backIndex()} />
+      <div className="arrowLeft" onClick={() => backIndex()}>
+        <FaChevronLeft size="45" />
       </div>
-      <div className="arrowRight">
-        <FaChevronRight size="45" onClick={() => nextIndex()} />
+      <div className="arrowRight" onClick={() => nextIndex()}>
+        <FaChevronRight size="45" />
       </div>
-      <div className="dots">
+      <div className="dots-container">
         {sliderInfo.map((img, index) => {
           return indexImg !== index ? (
-            <FaRegCircle key={index} onClick={() => setIndexImg(index)} />
+            <FaRegCircle
+              key={index}
+              onClick={() => setIndexImg(index)}
+              className="dot"
+            />
           ) : (
-            <FaRegDotCircle key={index} />
+            <FaRegDotCircle key={index} className="dot" />
           );
         })}
       </div>
