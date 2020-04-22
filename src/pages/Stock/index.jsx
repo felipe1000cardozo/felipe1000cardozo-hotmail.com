@@ -12,16 +12,17 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 
-import vehicles from "../../ultils/mockupVehicles";
+// import vehicles from "../../ultils/mockupVehicles";
 import getBiggestPrice from "../../ultils/getBiggestPrice";
 import getBiggestYear from "../../ultils/getBiggestYear";
 import getLowestYear from "../../ultils/getLowestYear";
 import CardsContainer from "../../components/CardsContainer";
 import ButtonComponent from "../../components/ButtonComponent";
 import { StyledStock } from "./styles";
+import firebase from "../../firebase";
 
 const Stock = () => {
-  const [toShowVehicles, setToShowVehicles] = useState(vehicles);
+  const [toShowVehicles, setToShowVehicles] = useState([]);
   const [order, setOrder] = useState("");
   const [brand, setBrand] = useState("all");
   const [search, setSearch] = useState("");
@@ -29,6 +30,15 @@ const Stock = () => {
   const [yearRange, setYearRange] = React.useState([1980, 2021]);
   const [currentPage, setCurrentPage] = useState(1);
   const [vehiclesPerPage, setVehiclesPerPage] = useState(12);
+
+  const [vehicles, setVehicles] = useState([]);
+
+  useEffect(() => {
+    firebase.app.ref("vehicles").once("value", (snapshot) => {
+      setVehicles(snapshot.val());
+      setToShowVehicles(snapshot.val());
+    });
+  }, []);
 
   useEffect(() => {
     setToShowVehicles(searching());
@@ -247,13 +257,16 @@ const Stock = () => {
           </Select>
         </FormControl>
       </div>
-
-      <CardsContainer
-        vehicles={toShowVehicles}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        vehiclesPerPage={vehiclesPerPage}
-      />
+      {toShowVehicles.length ? (
+        <CardsContainer
+          vehicles={toShowVehicles}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          vehiclesPerPage={vehiclesPerPage}
+        />
+      ) : (
+        "Carregando..."
+      )}
     </StyledStock>
   );
 };
