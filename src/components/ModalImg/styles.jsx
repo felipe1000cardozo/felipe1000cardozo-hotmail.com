@@ -18,6 +18,7 @@ export const ImgModal = styled.div`
   z-index: 11;
   img {
     max-height: 80vh;
+    width: initial;
     max-width: 80vw;
     cursor: default;
   }

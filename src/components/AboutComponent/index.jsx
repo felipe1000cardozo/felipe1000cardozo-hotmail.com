@@ -34,10 +34,7 @@ const AboutComponent = () => {
       <div className="container">
         <h3>Onde estamos</h3>
         <div>
-          <img
-            src="https://s3-alpha-sig.figma.com/img/eeaf/f2e9/82bf9efdf05f576ae719f91751c19ba1?Expires=1587340800&Signature=SskO0xRBPKFb8dV6BJ3qTdJCV8ekhfncnbIgSJU6FR866q3BiF-Nx-UsP-bNvUhRYAhmPazl0ZhMjE47RLFomsZ~4f6jb~90vbFtW2lT36oIg-UfiDZYi8vkYceC-e8x3Br~x~CqOHjsD-jGrYslCjFmcvj2pFGE1cYlqGlWF5nW-1gSTToXNRGtv4ioKfOIQCDAI43ktIQ2K7hu7Q~M3kFRNvkJK0X3KCRDtO8uhT6iwSsaz30-LnJfjWNmVy5sI2Pne3L99Bc17yDIcNkZNujsFgjiA1egZHCfdmV0F8AW~tnVKNzNxYrdB2QCpDmN4nqx18-6ZgX2sTsdrI6KuQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-            alt=""
-          />
+          <img src="https://www.w3schools.com/w3images/map.jpg" alt="" />
         </div>
       </div>
     </AboutComponentStyled>

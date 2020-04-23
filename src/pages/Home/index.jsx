@@ -8,6 +8,7 @@ import { Cards } from "./styles";
 import ButtonComponent from "../../components/ButtonComponent";
 
 import firebase from "../../firebase";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -32,7 +33,9 @@ const Home = () => {
             return <Card vehicle={vehicle} key={vehicle.id} />;
           })}
           <div>
-            <ButtonComponent value="Ver Mais" />
+            <Link to="/stock">
+              <ButtonComponent value="Ver Mais" />
+            </Link>
           </div>
         </Cards>
       ) : (

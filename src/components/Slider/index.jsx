@@ -32,7 +32,7 @@ const Slider = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       nextIndex();
-    }, 5000000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [indexImg, nextIndex]);
 
