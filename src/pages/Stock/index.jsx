@@ -78,6 +78,7 @@ const Stock = () => {
     vehicles2 = filterMinPrice(priceRange[0], vehicles2);
     vehicles2 = filterMaxPrice(priceRange[1], vehicles2);
     setToShowVehicles([...vehicles2]);
+    setOrder("");
   };
 
   const filterByBrand = (brand, vehicles2) => {
@@ -228,21 +229,6 @@ const Stock = () => {
       </div>
       <div className="order">
         <FormControl>
-          <InputLabel>Ordenar por:</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={order}
-            onChange={(e) => setOrder(e.target.value)}
-          >
-            <MenuItem value={3}>Maior preço</MenuItem>
-            <MenuItem value={4}>Menor preço</MenuItem>
-            <MenuItem value={1}>Maior ano</MenuItem>
-            <MenuItem value={2}>Menor ano</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl>
           <InputLabel>Veiculos por página:</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -254,6 +240,21 @@ const Stock = () => {
             <MenuItem value={12}>12</MenuItem>
             <MenuItem value={20}>20</MenuItem>
             <MenuItem value={24}>24</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl>
+          <InputLabel>Ordenar por:</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+          >
+            <MenuItem value={3}>Maior preço</MenuItem>
+            <MenuItem value={4}>Menor preço</MenuItem>
+            <MenuItem value={1}>Maior ano</MenuItem>
+            <MenuItem value={2}>Menor ano</MenuItem>
           </Select>
         </FormControl>
       </div>
