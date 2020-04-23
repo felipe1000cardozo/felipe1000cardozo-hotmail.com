@@ -119,7 +119,7 @@ const Stock = () => {
     switch (order) {
       case 1:
         vehicles1.sort((a, b) => {
-          return a.year > b.year ? -1 : a.year > b.year ? 1 : 0;
+          return a.year > b.year ? -1 : a.year < b.year ? 1 : 0;
         });
         break;
       case 2:
@@ -129,7 +129,7 @@ const Stock = () => {
         break;
       case 3:
         vehicles1.sort((a, b) => {
-          return a.price > b.price ? -1 : a.price > b.price ? 1 : 0;
+          return a.price > b.price ? -1 : a.price < b.price ? 1 : 0;
         });
         break;
       case 4:
