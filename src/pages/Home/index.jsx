@@ -32,7 +32,7 @@ const Home = () => {
           {vehicles.map((vehicle) => {
             return <Card vehicle={vehicle} key={vehicle.id} />;
           })}
-          <div>
+          <div className="button-container">
             <Link to="/stock">
               <ButtonComponent value="Ver Mais" />
             </Link>

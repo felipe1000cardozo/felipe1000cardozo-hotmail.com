@@ -8,4 +8,8 @@ export const Cards = styled.div`
   > div {
     margin: 16px;
   }
+  .button-container {
+    width: 100%;
+    text-align: center;
+  }
 `;
