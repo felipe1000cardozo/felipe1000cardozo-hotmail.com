@@ -3,7 +3,7 @@ import SliderGallery from "../../components/SliderGallery";
 import firebase from "../../firebase";
 
 const VehiclePage = ({ match }) => {
-  var [vehicle, setVehicle] = useState([]);
+  var [vehicle, setVehicle] = useState({});
 
   useEffect(() => {
     firebase.app
