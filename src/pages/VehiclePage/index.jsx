@@ -1,15 +1,18 @@
 import React, { useEffect, useState, Fragment } from "react";
 import SliderGallery from "../../components/SliderGallery";
 import firebase from "../../firebase";
+import PreLoader from "../../components/PreLoader";
 
 const VehiclePage = ({ match }) => {
   var [vehicle, setVehicle] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     firebase.app
       .ref(`vehicles/${match.params.id - 1}`)
       .once("value", (snapshot) => {
         setVehicle(snapshot.val());
+        setLoading(false);
       });
   }, [match.params.id]);
 
@@ -17,7 +20,9 @@ const VehiclePage = ({ match }) => {
 
   return (
     <Fragment>
-      {vehicle.model ? (
+      {loading ? (
+        <PreLoader />
+      ) : (
         <div>
           <h1>veiculo</h1>
           <h3>{model}</h3>
@@ -32,8 +37,6 @@ const VehiclePage = ({ match }) => {
           </div>
           <div>R$: {price}</div>
         </div>
-      ) : (
-        "carregando..."
       )}
     </Fragment>
   );

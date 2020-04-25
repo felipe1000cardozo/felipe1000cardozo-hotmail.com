@@ -9,9 +9,11 @@ import ButtonComponent from "../../components/ButtonComponent";
 
 import firebase from "../../firebase";
 import { Link } from "react-router-dom";
+import PreLoader from "../../components/PreLoader";
 
 const Home = () => {
   const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     firebase.app.ref("vehicles").once("value", (snapshot) => {
@@ -21,13 +23,16 @@ const Home = () => {
         fourVehicles[i] = snapshot.val()[i];
       }
       setVehicles(fourVehicles);
+      setLoading(false);
     });
   }, []);
 
   return (
     <Fragment>
       <Slider />
-      {vehicles.length ? (
+      {loading ? (
+        <PreLoader />
+      ) : (
         <Cards>
           {vehicles.map((vehicle) => {
             return <Card vehicle={vehicle} key={vehicle.id} />;
@@ -38,8 +43,6 @@ const Home = () => {
             </Link>
           </div>
         </Cards>
-      ) : (
-        "carregando..."
       )}
 
       <AboutComponent />
