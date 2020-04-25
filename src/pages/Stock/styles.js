@@ -12,13 +12,13 @@ const StyledStock = styled.main`
       display: flex;
       align-items: flex-end;
       .MuiFormLabel-root {
-        color: rgba(0, 0, 0, 0.54);
+        color: var(--third-color);
       }
       .MuiInputBase-root {
         width: 300px;
       }
       .MuiInput-underline:after {
-        border-bottom-color: var(--third-color);
+        border-bottom-color: var(--secoundary-color);
       }
     }
   }
@@ -29,7 +29,7 @@ const StyledStock = styled.main`
     top: -13px;
     left: 17px;
     z-index: 2;
-    color: rgba(0, 0, 0, 0.54);
+    color: var(--third-color);
   }
   nav {
     width: 50%;
@@ -44,13 +44,13 @@ const StyledStock = styled.main`
       padding: 12px;
       z-index: 2;
       .MuiSlider-root {
-        color: var(--third-color);
+        color: var(--secoundary-color);
       }
       .MuiFormControl-root label {
-        color: rgba(0, 0, 0, 0.54);
+        color: var(--third-color);
       }
       .MuiInput-underline:after {
-        border-bottom-color: var(--third-color);
+        border-bottom-color: var(--secoundary-color);
       }
       span {
         /* color: var(); */
@@ -62,7 +62,7 @@ const StyledStock = styled.main`
   }
   .order {
     width: 100%;
-    background-color: #f3f5f8;
+    background-color: var(--background-color);
     display: flex;
     justify-content: flex-end;
     .MuiFormControl-root {
@@ -72,10 +72,10 @@ const StyledStock = styled.main`
     .MuiInputLabel-formControl {
       top: 12px;
       left: 28px;
-      color: rgba(0, 0, 0, 0.54);
+      color: var(--third-color);
     }
     .MuiInput-underline:after {
-      border-bottom-color: var(--third-color);
+      border-bottom-color: var(--secoundary-color);
     }
   }
 `;

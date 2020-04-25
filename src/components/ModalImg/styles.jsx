@@ -31,7 +31,7 @@ export const ImgModal = styled.div`
     padding: 8px;
     background-color: rgba(0, 0, 0, 0.2);
     :hover {
-      background-color: rgba(0, 0, 0, 0.54);
+      background-color: var(--third-color);
     }
   }
 `;

@@ -4,9 +4,9 @@ const CardsContainerStyled = styled.main`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-color: #f3f5f8;
+  background-color: var(--background-color);
   .MuiPaginationItem-page.Mui-selected {
-    background-color: var(--third-color);
+    background-color: var(--secoundary-color);
   }
   .MuiPagination-root {
     width: fit-content;

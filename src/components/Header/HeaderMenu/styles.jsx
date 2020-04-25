@@ -40,7 +40,7 @@ export const Contact = styled.div`
   justify-content: flex-start;
   padding-left: 115px;
   width: 50%;
-  background-color: var(--third-color);
+  background-color: var(--secoundary-color);
   box-shadow: inset 0px 4px 4px var(--primary-color);
   a {
     display: block;

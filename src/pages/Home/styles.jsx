@@ -4,7 +4,7 @@ export const Cards = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-color: #f3f5f8;
+  background-color: var(--background-color);
   > div {
     margin: 16px;
   }

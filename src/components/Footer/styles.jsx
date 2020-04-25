@@ -32,6 +32,6 @@ export const CompanyInfo = styled.div`
   padding-right: 20px;
   justify-content: center;
   width: 50%;
-  background-color: var(--third-color);
+  background-color: var(--secoundary-color);
   box-shadow: inset 0px 4px 4px var(--primary-color);
 `;

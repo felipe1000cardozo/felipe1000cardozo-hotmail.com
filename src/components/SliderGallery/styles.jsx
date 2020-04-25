@@ -14,7 +14,7 @@ const SliderStyled = styled.div`
     cursor: zoom-in;
   }
   .selected {
-    border: 3px solid var(--third-color);
+    border: 3px solid var(--secoundary-color);
   }
 
   .arrowLeft,
