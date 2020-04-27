@@ -14,7 +14,7 @@ const CardsContainer = ({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [numberOfPages]);
+  }, [numberOfPages, setCurrentPage]);
 
   return (
     <CardsContainerStyled>

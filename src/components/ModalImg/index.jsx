@@ -10,7 +10,7 @@ const ModalImg = ({ img, onClickClose }) => {
     return () => {
       window.removeEventListener("keydown", onClickClose);
     };
-  }, []);
+  }, [onClickClose]);
 
   return (
     <Fragment>

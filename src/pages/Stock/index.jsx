@@ -13,9 +13,9 @@ import {
 } from "@material-ui/core";
 
 // import vehicles from "../../ultils/mockupVehicles";
-import getBiggestPrice from "../../ultils/getBiggestPrice";
-import getBiggestYear from "../../ultils/getBiggestYear";
-import getLowestYear from "../../ultils/getLowestYear";
+// import getBiggestPrice from "../../ultils/getBiggestPrice";
+// import getBiggestYear from "../../ultils/getBiggestYear";
+// import getLowestYear from "../../ultils/getLowestYear";
 import CardsContainer from "../../components/CardsContainer";
 import ButtonComponent from "../../components/ButtonComponent";
 import { StyledStock } from "./styles";
@@ -35,11 +35,14 @@ const Stock = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    firebase.app.ref("vehicles").once("value", (snapshot) => {
-      setVehicles(snapshot.val());
-      setToShowVehicles(snapshot.val());
-      setLoading(false);
-    });
+    firebase.app
+      .ref("vehicles")
+      .once("value")
+      .then((snapshot) => {
+        setVehicles(snapshot.val());
+        setToShowVehicles(snapshot.val());
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {

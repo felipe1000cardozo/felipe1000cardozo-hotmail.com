@@ -9,7 +9,8 @@ const VehiclePage = ({ match }) => {
 
   useEffect(() => {
     firebase.app
-      .ref(`vehicles/${match.params.id - 1}`)
+      .ref("vehicles")
+      .child(`/${match.params.id - 1}`)
       .once("value", (snapshot) => {
         setVehicle(snapshot.val());
         setLoading(false);
