@@ -20,7 +20,7 @@ const defaultVehicle = {
   imgs: [""],
 };
 
-const AdminPainel = () => {
+const AdminPainel = ({ history }) => {
   var [vehicles, setVehicles] = useState({});
   var [newVehicle, setNewVehicle] = useState(defaultVehicle);
   //const [loading, setLoading] = useState(true);
@@ -30,6 +30,24 @@ const AdminPainel = () => {
       setVehicles(snapshot.val());
       //setLoading(false);
     });
+  }, []);
+
+  async function logout() {
+    await firebase.logout().catch((error) => console.log(error));
+    history.push("/");
+  }
+
+  useEffect(() => {
+    console.log(firebase.getCurrent());
+    // if (!firebase.getCurrent()) {
+    //   //props.history.replace("/login");
+    //   return null;
+    // }
+
+    // firebase.getUserName(info => {
+    //   localStorage.userName = info.val().nome;
+    //   setNome(localStorage.userName);
+    // });
   }, []);
 
   useEffect(() => {
@@ -61,6 +79,9 @@ const AdminPainel = () => {
       <div>
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           Adicionar novo veiculo
+        </Button>
+        <Button variant="outlined" color="secondary" onClick={() => logout()}>
+          Logout
         </Button>
         <Dialog
           open={open}
@@ -154,10 +175,21 @@ const AdminPainel = () => {
               <br />
               <br />
               <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="secondary"
+                  onClick={handleClose}
+                >
                   Cancelar
                 </Button>
-                <Button onClick={handleClose} color="primary" type="submit">
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  type="submit"
+                  onClick={handleClose}
+                >
                   Cadastrar
                 </Button>
               </DialogActions>

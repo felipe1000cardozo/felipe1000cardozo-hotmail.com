@@ -35,13 +35,13 @@ class Firebase {
   //     });
   // };
 
-  // login(email, password) {
-  //   return app.auth().signInWithEmailAndPassword(email, password);
-  // }
+  login(email, password) {
+    return app.auth().signInWithEmailAndPassword(email, password);
+  }
 
-  // logout() {
-  //   return app.auth().signOut();
-  // }
+  logout() {
+    return app.auth().signOut();
+  }
 
   // async register(nome, email, password) {
   //   await app.auth().createUserWithEmailAndPassword(email, password);
@@ -53,15 +53,15 @@ class Firebase {
   //   });
   // }
 
-  // isInitialized() {
-  //   return new Promise((resolve) => {
-  //     app.auth().onAuthStateChanged(resolve);
-  //   });
-  // }
+  isInitialized() {
+    return new Promise((resolve) => {
+      app.auth().onAuthStateChanged(resolve);
+    });
+  }
 
-  // getCurrent() {
-  //   return app.auth().currentUser && app.auth().currentUser.email;
-  // }
+  getCurrent() {
+    return app.auth().currentUser && app.auth().currentUser.email;
+  }
 
   // getCurrentUid() {
   //   return app.auth().currentUser && app.auth().currentUser.uid;

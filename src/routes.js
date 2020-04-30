@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -11,12 +11,14 @@ import AdminPainel from "./pages/AdminPainel";
 import NotFound from "./pages/NotFound";
 import VehiclePage from "./pages/VehiclePage";
 import Login from "./pages/Login";
+import firebase from "./firebase";
+import PreLoader from "./components/PreLoader";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      true ? (
+      firebase.getCurrent() ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -28,7 +30,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const Routes = () => {
-  return (
+  const [firebaseInitialized, setFirebaseInitialized] = useState(false);
+
+  useEffect(() => {
+    firebase.isInitialized().then((resultado) => {
+      setFirebaseInitialized(resultado);
+      console.log(firebaseInitialized);
+    });
+  }, []);
+
+  return firebaseInitialized !== false ? (
     <BrowserRouter>
       <Header />
       <Switch>
@@ -43,6 +54,8 @@ const Routes = () => {
       </Switch>
       <Footer />
     </BrowserRouter>
+  ) : (
+    <PreLoader />
   );
 };
 
