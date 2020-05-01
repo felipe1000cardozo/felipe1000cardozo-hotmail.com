@@ -4,10 +4,12 @@ import {
   InputLabel,
   Input,
   InputAdornment,
+  Tooltip,
 } from "@material-ui/core";
 import { FaSearch } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { StyledVehiclesList } from "./styles";
 
 const VehiclesListComponent = ({ vehicles }) => {
   const [search, setSearch] = useState("");
@@ -16,10 +18,10 @@ const VehiclesListComponent = ({ vehicles }) => {
   }, []);
 
   return (
-    <div>
-      <div>
+    <StyledVehiclesList>
+      <div className="header">
         <div>
-          <h3>Veículos</h3>
+          <h2>Veículos</h2>
         </div>
         <div>
           <FormControl className="search-container">
@@ -43,6 +45,9 @@ const VehiclesListComponent = ({ vehicles }) => {
       <div>
         <div className="header-list">
           <div>
+            <h4>#</h4>
+          </div>
+          <div>
             <h4>Placa</h4>
           </div>
           <div>
@@ -58,30 +63,41 @@ const VehiclesListComponent = ({ vehicles }) => {
             <h4>Editar/Excluir</h4>
           </div>
         </div>
-        <div className="list-item">
-          <div>
-            <p>abc-123</p>
+        {vehicles.map((vehicle, index) => (
+          <div className="list-item">
+            <div>
+              <p>{index + 1}</p>
+            </div>
+            <div>
+              <p>{vehicle.plate}</p>
+            </div>
+            <div>
+              <p>
+                {vehicle.brand} - {vehicle.model}
+              </p>
+            </div>
+            <div>
+              <p>{vehicle.year}</p>
+            </div>
+            <div>
+              <p>{vehicle.price}</p>
+            </div>
+            <div>
+              <Tooltip title="Editar veículo" placement="top">
+                <button>
+                  <FiEdit size="20" />
+                </button>
+              </Tooltip>
+              <Tooltip title="Excluir veículo" placement="top">
+                <button>
+                  <RiDeleteBin6Line size="20" />
+                </button>
+              </Tooltip>
+            </div>
           </div>
-          <div>
-            <p>Honda - Cg 150</p>
-          </div>
-          <div>
-            <p>2010</p>
-          </div>
-          <div>
-            <p>8000</p>
-          </div>
-          <div>
-            <button>
-              <FiEdit />
-            </button>
-            <button>
-              <RiDeleteBin6Line />
-            </button>
-          </div>
-        </div>
+        ))}
       </div>
-    </div>
+    </StyledVehiclesList>
   );
 };
 

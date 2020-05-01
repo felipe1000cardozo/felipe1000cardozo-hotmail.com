@@ -3,7 +3,7 @@ import styled from "styled-components";
 const SliderStyled = styled.div`
   color: var(--primary-color);
   background-color: var(--four-color);
-  width: 55%;
+  width: 700px;
   padding: 24px;
   .main-img-container {
     position: relative;
@@ -12,6 +12,7 @@ const SliderStyled = styled.div`
   img {
     width: 100%;
     cursor: zoom-in;
+    border: 1px solid var(--secoundary-color);
   }
   .selected {
     border: 3px solid var(--secoundary-color);
