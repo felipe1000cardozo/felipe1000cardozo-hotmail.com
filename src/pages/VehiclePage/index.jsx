@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import SliderGallery from "../../components/SliderGallery";
 import firebase from "../../firebase";
 import PreLoader from "../../components/PreLoader";
+import { MainVehiclePage } from "./styles";
 
 const VehiclePage = ({ match }) => {
   var [vehicle, setVehicle] = useState({});
@@ -24,20 +25,21 @@ const VehiclePage = ({ match }) => {
       {loading ? (
         <PreLoader />
       ) : (
-        <div>
-          <h1>veiculo</h1>
+        <Fragment>
           <h3>{model}</h3>
-          <div>
-            <SliderGallery imgs={imgs} />
-          </div>
-          <div>
-            <p>{description}</p>
-            <p>Marca: {brand}</p>
-            <p>Ano: {year}</p>
-            <p>KM: {km}</p>
-          </div>
-          <div>R$: {price}</div>
-        </div>
+          <MainVehiclePage>
+            <div clasname="slider-vehicle">
+              <SliderGallery imgs={imgs} />
+            </div>
+            <div className="infos-vehicle">
+              <p className="price">R$: {price}</p>
+              <p>Marca: {brand}</p>
+              <p>Ano: {year}</p>
+              <p>KM: {km}</p>
+              <p>{description}</p>
+            </div>
+          </MainVehiclePage>
+        </Fragment>
       )}
     </Fragment>
   );
