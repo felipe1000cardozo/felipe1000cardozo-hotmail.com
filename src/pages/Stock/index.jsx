@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { FaSearch } from "react-icons/fa";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import Slider from "@material-ui/core/Slider";
 import {
   InputLabel,
@@ -10,6 +11,9 @@ import {
   Box,
   Input,
   InputAdornment,
+  Button,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
 
 // import vehicles from "../../ultils/mockupVehicles";
@@ -33,6 +37,16 @@ const Stock = () => {
   const [vehiclesPerPage, setVehiclesPerPage] = useState(12);
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const resetFilters = () => {
+    setPriceRange([0, 50000]);
+    setYearRange([1980, 2021]);
+    setBrand("all");
+  };
+
+  useEffect(() => {
+    filterVehicles();
+  }, [brand, yearRange, priceRange]);
 
   useEffect(() => {
     firebase.app
@@ -206,12 +220,16 @@ const Stock = () => {
                 })}
               </Select>
             </FormControl>
-            <ButtonComponent
-              value="Filtrar"
-              onClick={() => {
-                filterVehicles();
-              }}
-            />
+
+            <div>
+              {vehicles.length !== toShowVehicles.length && (
+                <Tooltip title="Resetar filtros">
+                  <IconButton aria-label="delete" onClick={resetFilters}>
+                    <IoIosCloseCircleOutline />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </div>
           </div>
         </Box>
 
