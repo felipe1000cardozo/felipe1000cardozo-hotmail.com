@@ -3,6 +3,9 @@ import SliderGallery from "../../components/SliderGallery";
 import firebase from "../../firebase";
 import PreLoader from "../../components/PreLoader";
 import { MainVehiclePage } from "./styles";
+import { FaMotorcycle } from "react-icons/fa";
+import { IoMdSpeedometer } from "react-icons/io";
+import { GoCalendar } from "react-icons/go";
 
 const VehiclePage = ({ match }) => {
   var [vehicle, setVehicle] = useState({});
@@ -26,17 +29,31 @@ const VehiclePage = ({ match }) => {
         <PreLoader />
       ) : (
         <Fragment>
-          <h3>{model}</h3>
           <MainVehiclePage>
-            <div clasname="slider-vehicle">
+            <div>
+              <p className="title">{model}</p>
               <SliderGallery imgs={imgs} />
             </div>
             <div className="infos-vehicle">
               <p className="price">R$: {price}</p>
-              <p>Marca: {brand}</p>
-              <p>Ano: {year}</p>
-              <p>KM: {km}</p>
-              <p>{description}</p>
+              <div className="description">
+                <FaMotorcycle size="40" />
+                <p>
+                  {brand} - {model}
+                </p>
+              </div>
+              <div className="description">
+                <GoCalendar size="40" />
+                <p>{year}</p>
+              </div>
+              <div className="description">
+                <IoMdSpeedometer size="40" />
+                <p>{km}</p>
+              </div>
+              <span>
+                <h4>Descrição</h4>
+                <p>{description}</p>
+              </span>
             </div>
           </MainVehiclePage>
         </Fragment>

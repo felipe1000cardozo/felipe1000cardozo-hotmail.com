@@ -35,6 +35,7 @@ const SliderGallery = ({ imgs }) => {
         <ModalImg img={imgs[currentImg]} onClickClose={onClickClose} />
       ) : null}
       <div className="main-img-container">
+        <span></span>
         <div className="arrowLeft" onClick={() => backIndex()}>
           <FaChevronLeft size="45" />
         </div>
