@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { MainMenu, Image, MenuList } from "./styles";
 
-const Menu = () => {
+const Menu = ({ pathname }) => {
   return (
     <MainMenu>
       <Image>
@@ -16,16 +16,24 @@ const Menu = () => {
 
       <MenuList>
         <li>
-          <Link to={"/"}>HOME</Link>
+          <Link to={"/"} className={pathname === "/" && "active"}>
+            HOME
+          </Link>
         </li>
         <li>
-          <Link to={"/stock"}>ESTOQUE</Link>
+          <Link to={"/stock"} className={pathname === "/stock" && "active"}>
+            ESTOQUE
+          </Link>
         </li>
         <li>
-          <Link to={"/about"}>SOBRE</Link>
+          <Link to={"/about"} className={pathname === "/about" && "active"}>
+            SOBRE
+          </Link>
         </li>
         <li>
-          <Link to={"/contact"}>CONTATO</Link>
+          <Link to={"/contact"} className={pathname === "/contact" && "active"}>
+            CONTATO
+          </Link>
         </li>
       </MenuList>
     </MainMenu>

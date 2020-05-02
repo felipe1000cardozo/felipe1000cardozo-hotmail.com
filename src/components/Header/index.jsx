@@ -12,7 +12,7 @@ const Header = () => {
       {pathname === "/admin" || pathname === "/login" ? null : (
         <Fragment>
           <HeaderMenu />
-          <Menu />
+          <Menu pathname={pathname} />
         </Fragment>
       )}
     </Fragment>

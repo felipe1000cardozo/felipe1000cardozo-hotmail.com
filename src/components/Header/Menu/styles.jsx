@@ -48,4 +48,8 @@ export const MenuList = styled.ul`
     color: var(--primary-color);
     border-bottom: 3px solid var(--primary-color);
   }
+  .active {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+  }
 `;
