@@ -8,7 +8,7 @@ export const MainVehiclePage = styled.div`
     position: relative;
     font-size: 18px;
     z-index: 2;
-    top: 3%;
+    top: 2%;
     left: 9%;
     width: fit-content;
   }
