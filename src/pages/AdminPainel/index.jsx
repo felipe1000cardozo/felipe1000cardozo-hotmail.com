@@ -14,7 +14,7 @@ import { StyledAdminPainel, FormContainer, AddPhotosButton } from "./styles";
 import { RiStore3Line } from "react-icons/ri";
 import { MdAddAPhoto } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { Tooltip } from "@material-ui/core";
+import { Tooltip, CircularProgress } from "@material-ui/core";
 
 const defaultVehicle = {
   id: "",
@@ -26,13 +26,15 @@ const defaultVehicle = {
   power: "",
   description: "",
   plate: "",
-  imgs: [""],
+  imgs: [],
 };
 
 const AdminPainel = ({ history }) => {
   const [vehicles, setVehicles] = useState({});
   const [newVehicle, setNewVehicle] = useState(defaultVehicle);
   const [loading, setLoading] = useState(true);
+  const [newImgs, setNewImgs] = useState([]);
+  const [uploadImgProgress, setUploadImgProgress] = useState(null);
 
   useEffect(() => {
     firebase.app.ref("vehicles").on("value", (snapshot) => {
@@ -47,26 +49,12 @@ const AdminPainel = ({ history }) => {
   }
 
   useEffect(() => {
-    console.log(firebase.getCurrent());
-    // if (!firebase.getCurrent()) {
-    //   //props.history.replace("/login");
-    //   return null;
-    // }
-
-    // firebase.getUserName(info => {
-    //   localStorage.userName = info.val().nome;
-    //   setNome(localStorage.userName);
-    // });
-  }, []);
-
-  useEffect(() => {
     setNewVehicle((prevState) => ({ ...prevState, id: vehicles.length + 1 }));
   }, [vehicles]);
 
   const registerNewVehicle = (event) => {
     event.preventDefault();
 
-    console.log(newVehicle);
     firebase.app.ref("vehicles").child(vehicles.length).set(newVehicle);
     setNewVehicle(defaultVehicle);
   };
@@ -79,6 +67,57 @@ const AdminPainel = ({ history }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const uploadPhoto = async (e) => {
+    if (e.target.files.length) {
+      setNewImgs((prevState) => [
+        ...prevState,
+        ...Object.values(e.target.files),
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    if (newImgs.length) {
+      handleUpload();
+    }
+  }, [newImgs]);
+
+  const handleUpload = async () => {
+    const uploadTaks = firebase.storage
+      .ref(`images/${newVehicle.id}/${newImgs[newImgs.length - 1].name}`)
+      .put(newImgs[newImgs.length - 1]);
+
+    await uploadTaks.on(
+      "state_changed",
+      (snapshot) => {
+        //progress
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setUploadImgProgress(progress);
+        console.log(progress);
+      },
+      (error) => {
+        //error
+        console.log("Error imagem: " + error);
+      },
+      () => {
+        //sucessO!
+        setUploadImgProgress(null);
+        firebase.storage
+          .ref(`imagesVehicles/${vehicles.length + 1}`)
+          .child(newImgs[newImgs.length - 1].name)
+          .getDownloadURL()
+          .then((url) => {
+            setNewVehicle((prevState) => ({
+              ...prevState,
+              imgs: [...prevState.imgs, url],
+            }));
+          });
+      }
+    );
   };
 
   return (
@@ -228,39 +267,35 @@ const AdminPainel = ({ history }) => {
                   <div className="add-photos-container">
                     <p>Fotos</p>
                     <div className="photos-container">
-                      <img
-                        src="https://media.gazetadopovo.com.br/2019/09/13112603/moto-leilao-640x372.png"
-                        alt=""
-                      />
-                      <img
-                        src="https://media.gazetadopovo.com.br/2019/09/13112603/moto-leilao-640x372.png"
-                        alt=""
-                      />
-                      <img
-                        src="https://media.gazetadopovo.com.br/2019/09/13112603/moto-leilao-640x372.png"
-                        alt=""
-                      />
+                      {newVehicle.imgs.map((vehicleImg) => (
+                        <img src={vehicleImg} />
+                      ))}
 
-                      <Tooltip title="Adicionar foto" placement="top">
-                        <AddPhotosButton>
-                          <MdAddAPhoto size="35" />
-                          <p>Somente JPG ou PNG</p>
-                        </AddPhotosButton>
-                      </Tooltip>
+                      {uploadImgProgress ? (
+                        <div className="uploading">
+                          <CircularProgress
+                            variant="determinate"
+                            value={uploadImgProgress}
+                          />
+                        </div>
+                      ) : (
+                        <Tooltip title="Adicionar foto" placement="top">
+                          <AddPhotosButton for="upload-photo-input">
+                            <input
+                              type="file"
+                              name="upload-photo-input"
+                              id="upload-photo-input"
+                              accept="image/png, image/jpeg"
+                              multiple
+                              onChange={uploadPhoto}
+                            />
+                            <MdAddAPhoto size="35" />
+                            <p>Somente JPG ou PNG</p>
+                          </AddPhotosButton>
+                        </Tooltip>
+                      )}
                     </div>
                   </div>
-
-                  {/* <TextField
-                    label="URL img"
-                    placeholder="URL img"
-                    value={newVehicle.imgs}
-                    onChange={(event) => {
-                      setNewVehicle({
-                        ...newVehicle,
-                        imgs: [event.target.value],
-                      });
-                    }}
-                  /> */}
 
                   <DialogActions>
                     <Button

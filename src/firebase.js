@@ -19,7 +19,7 @@ class Firebase {
     app.initializeApp(firebaseConfig);
 
     this.app = app.database();
-    //this.storage = app.storage();
+    this.storage = app.storage();
   }
 
   // getVehicleById = async (id) => {

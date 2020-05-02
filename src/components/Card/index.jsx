@@ -11,7 +11,7 @@ const Card = ({ vehicle }) => {
     <CarCard key={id}>
       <h3>{model}</h3>
       <Image>
-        <img src={imgs[0] === "" ? noImgUrl : imgs[0]} alt="MOTO" />
+        {imgs && <img src={imgs[0] === "" ? noImgUrl : imgs[0]} alt="MOTO" />}
       </Image>
       <CardInfos>
         <p>Marca: {brand}</p>

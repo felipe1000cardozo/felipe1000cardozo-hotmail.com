@@ -27,9 +27,11 @@ export const FormContainer = styled.form`
       margin-right: 24px;
     }
   }
+
   .description-input-container {
     margin-top: 24px;
   }
+
   .add-photos-container {
     margin-top: 12px;
     p {
@@ -40,18 +42,25 @@ export const FormContainer = styled.form`
       height: fit-content;
       flex-wrap: wrap;
       max-width: 444px;
+      .uploading {
+        height: 103px;
+        width: 136px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       img {
         height: 103px;
         object-fit: cover;
         max-width: 136px;
-        margin: 6px 6px;
+        margin: 0px 6px 6px 6px;
         border-radius: 2px;
       }
     }
   }
 `;
 
-export const AddPhotosButton = styled.div`
+export const AddPhotosButton = styled.label`
   width: 136px;
   height: 103px;
   border-radius: 2px;
@@ -62,6 +71,9 @@ export const AddPhotosButton = styled.div`
   align-items: center;
   cursor: pointer;
   margin-left: 6px;
+  #upload-photo-input {
+    display: none;
+  }
   p {
     font-size: 11px;
     margin-top: 4px;
