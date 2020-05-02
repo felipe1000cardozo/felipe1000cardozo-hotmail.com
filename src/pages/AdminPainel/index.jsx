@@ -86,7 +86,9 @@ const AdminPainel = ({ history }) => {
 
   const handleUpload = async () => {
     const uploadTaks = firebase.storage
-      .ref(`images/${newVehicle.id}/${newImgs[newImgs.length - 1].name}`)
+      .ref(
+        `imagesVehicles/${newVehicle.id}/${newImgs[newImgs.length - 1].name}`
+      )
       .put(newImgs[newImgs.length - 1]);
 
     await uploadTaks.on(
