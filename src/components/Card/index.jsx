@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { CarCard, Image, CardInfos, Price } from "./styles";
 import { Link } from "react-router-dom";
 import ButtonComponent from "../ButtonComponent";
+import priceMask from "../../ultils/priceMask";
 
 const Card = ({ vehicle }) => {
   const { id, model, imgs, brand, year, km, price } = vehicle;
@@ -18,7 +19,7 @@ const Card = ({ vehicle }) => {
         <p>Ano: {year}</p>
         <p>KM: {km}</p>
       </CardInfos>
-      <Price>R$: {price}</Price>
+      <Price> {priceMask(price)} </Price>
 
       <Link to={`/stock/${id}`}>
         <ButtonComponent value="Ver Mais" />

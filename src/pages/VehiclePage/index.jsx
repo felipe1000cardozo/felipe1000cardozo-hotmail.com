@@ -6,6 +6,7 @@ import { MainVehiclePage } from "./styles";
 import { FaMotorcycle } from "react-icons/fa";
 import { IoMdSpeedometer } from "react-icons/io";
 import { GoCalendar } from "react-icons/go";
+import priceMask from "../../ultils/priceMask";
 
 const VehiclePage = ({ match }) => {
   var [vehicle, setVehicle] = useState({});
@@ -35,7 +36,7 @@ const VehiclePage = ({ match }) => {
               <SliderGallery imgs={imgs} />
             </div>
             <div className="infos-vehicle">
-              <p className="price">R$: {price}</p>
+              <p className="price"> {priceMask(price)}</p>
               <div className="description">
                 <FaMotorcycle size="40" />
                 <p>

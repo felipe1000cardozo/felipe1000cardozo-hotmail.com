@@ -15,6 +15,7 @@ import { RiStore3Line } from "react-icons/ri";
 import { MdAddAPhoto } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Tooltip, CircularProgress } from "@material-ui/core";
+import priceMask from "../../ultils/priceMask";
 
 const defaultVehicle = {
   id: "",
