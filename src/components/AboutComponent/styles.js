@@ -12,7 +12,6 @@ const AboutComponentStyled = styled.section`
   }
   .container {
     width: 412px;
-    height: 312px;
   }
   .container > div {
     border: 2px solid #0375b4;
@@ -23,8 +22,13 @@ const AboutComponentStyled = styled.section`
     display: flex;
     align-items: center;
   }
+  .container p a {
+    text-decoration: none;
+    color: #222;
+  }
   img {
     width: 100%;
+    height: 344px;
   }
 `;
 export { AboutComponentStyled };

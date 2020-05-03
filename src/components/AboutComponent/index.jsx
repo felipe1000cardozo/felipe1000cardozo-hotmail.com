@@ -1,6 +1,8 @@
 import React from "react";
 import { MdPhone, MdLocationOn } from "react-icons/md";
 import { IoLogoWhatsapp, IoIosMail } from "react-icons/io";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
 
 import { AboutComponentStyled } from "./styles";
 import configInfos from "../../configInfos";
@@ -20,6 +22,16 @@ const AboutComponent = () => {
           <p>
             <IoLogoWhatsapp size="40" />
             {telefone2}
+          </p>
+          <p>
+            <a href="https://www.facebook.com/" target="blank">
+              <FaFacebook size="40" />
+            </a>
+            Facebook
+          </p>
+          <p>
+            <AiFillInstagram size="40" />
+            Intragram
           </p>
           <p>
             <IoIosMail size="40" />
