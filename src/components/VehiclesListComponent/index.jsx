@@ -13,9 +13,7 @@ import { StyledVehiclesList } from "./styles";
 
 const VehiclesListComponent = ({ vehicles }) => {
   const [search, setSearch] = useState("");
-  useEffect(() => {
-    console.log(vehicles);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <StyledVehiclesList>

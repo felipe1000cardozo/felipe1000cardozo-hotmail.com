@@ -17,9 +17,9 @@ import {
 } from "@material-ui/core";
 
 // import vehicles from "../../ultils/mockupVehicles";
-// import getBiggestPrice from "../../ultils/getBiggestPrice";
-// import getBiggestYear from "../../ultils/getBiggestYear";
-// import getLowestYear from "../../ultils/getLowestYear";
+import getBiggestPrice from "../../ultils/getBiggestPrice";
+import getBiggestYear from "../../ultils/getBiggestYear";
+import getLowestYear from "../../ultils/getLowestYear";
 import CardsContainer from "../../components/CardsContainer";
 import ButtonComponent from "../../components/ButtonComponent";
 import { StyledStock } from "./styles";
@@ -39,8 +39,8 @@ const Stock = () => {
   const [loading, setLoading] = useState(true);
 
   const resetFilters = () => {
-    setPriceRange([0, 50000]);
-    setYearRange([1980, 2021]);
+    setPriceRange([0, getBiggestPrice(vehicles)]);
+    setYearRange([getLowestYear(vehicles), getBiggestYear(vehicles)]);
     setBrand("all");
   };
 
@@ -53,8 +53,28 @@ const Stock = () => {
       .ref("vehicles")
       .once("value")
       .then((snapshot) => {
-        setVehicles(snapshot.val());
-        setToShowVehicles(snapshot.val());
+        let vehicles = [];
+
+        snapshot.forEach((childItem) => {
+          vehicles.push({
+            key: childItem.key,
+            brand: childItem.val().brand,
+            model: childItem.val().model,
+            description: childItem.val().description,
+            price: childItem.val().price,
+            id: childItem.val().id,
+            imgs: childItem.val().imgs,
+            plate: childItem.val().plate,
+            power: childItem.val().power,
+            year: childItem.val().year,
+          });
+        });
+        setVehicles(vehicles);
+
+        //setVehicles(Object.values(snapshot.val()));
+        setToShowVehicles(Object.values(snapshot.val()));
+        setPriceRange([0, getBiggestPrice(vehicles)]);
+        setYearRange([getLowestYear(vehicles), getBiggestYear(vehicles)]);
         setLoading(false);
       });
   }, []);
@@ -90,7 +110,9 @@ const Stock = () => {
   });
 
   const filterVehicles = () => {
-    let vehicles2 = [...vehicles];
+    //let vehicles2 = [...vehicles];
+    let vehicles2 = vehicles;
+
     vehicles2 = filterByBrand(brand, vehicles2);
     vehicles2 = filterMinYear(yearRange[0], vehicles2);
     vehicles2 = filterMaxYear(yearRange[1], vehicles2);
@@ -107,6 +129,15 @@ const Stock = () => {
     return vehicles2;
   };
 
+  const filterMinYear = (minYear, vehicles2) => {
+    if (minYear > 0) {
+      vehicles2 = vehicles2.filter((vehicle) => {
+        return vehicle.year >= minYear;
+      });
+    }
+    return vehicles2;
+  };
+
   const filterMinPrice = (minPrice, vehicles2) => {
     vehicles2 = vehicles2.filter((vehicle) => vehicle.price >= minPrice);
     return vehicles2;
@@ -115,13 +146,6 @@ const Stock = () => {
   const filterMaxPrice = (maxPrice, vehicles2) => {
     if (maxPrice > 0) {
       vehicles2 = vehicles2.filter((vehicle) => vehicle.price <= maxPrice);
-    }
-    return vehicles2;
-  };
-
-  const filterMinYear = (minYear, vehicles2) => {
-    if (minYear > 0) {
-      vehicles2 = vehicles2.filter((vehicle) => vehicle.year >= minYear);
     }
     return vehicles2;
   };
@@ -164,132 +188,135 @@ const Stock = () => {
 
   return (
     <StyledStock>
-      <div>
-        <Box
-          border={1}
-          borderColor="grey.500"
-          borderRadius={16}
-          component="nav"
-          m={1}
-        >
-          <span id="filter-tag">FILTROS</span>
-          <div className="sub-container-filters">
-            <div>
-              <InputLabel>Preço:</InputLabel>
-              <Slider
-                value={priceRange}
-                onChange={(e, newValue) => {
-                  setPriceRange(newValue);
-                }}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                max={50000}
-              />
-            </div>
-            <div>
-              <InputLabel>Ano</InputLabel>
-              <Slider
-                value={yearRange}
-                onChange={(e, newValue) => {
-                  setYearRange(newValue);
-                }}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                min={1980}
-                max={2021}
-              />
-            </div>
-          </div>
-          <div className="sub-container-filters">
-            <FormControl fullWidth>
-              <InputLabel>Marca</InputLabel>
-
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              >
-                <MenuItem value="all">Todas</MenuItem>
-                {allBrands.map((b) => {
-                  return (
-                    <MenuItem value={b} key={b}>
-                      {b}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-
-            <div>
-              {vehicles.length !== toShowVehicles.length && (
-                <Tooltip title="Resetar filtros">
-                  <IconButton aria-label="delete" onClick={resetFilters}>
-                    <IoIosCloseCircleOutline />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </div>
-          </div>
-        </Box>
-
-        <FormControl className="search-container">
-          <div>
-            <InputLabel htmlFor="standard-adornment">Pesquisar</InputLabel>
-            <Input
-              id="standard-adornment"
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <FaSearch color="#737373" />
-                </InputAdornment>
-              }
-            />
-          </div>
-        </FormControl>
-      </div>
-      <div className="order">
-        <FormControl>
-          <InputLabel>Veiculos por página:</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={vehiclesPerPage}
-            onChange={(e) => setVehiclesPerPage(e.target.value)}
-          >
-            <MenuItem value={8}>8</MenuItem>
-            <MenuItem value={12}>12</MenuItem>
-            <MenuItem value={20}>20</MenuItem>
-            <MenuItem value={24}>24</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl>
-          <InputLabel>Ordenar por:</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={order}
-            onChange={(e) => setOrder(e.target.value)}
-          >
-            <MenuItem value={3}>Maior preço</MenuItem>
-            <MenuItem value={4}>Menor preço</MenuItem>
-            <MenuItem value={1}>Maior ano</MenuItem>
-            <MenuItem value={2}>Menor ano</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
       {loading ? (
         <PreLoader />
       ) : (
-        <CardsContainer
-          vehicles={toShowVehicles}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          vehiclesPerPage={vehiclesPerPage}
-        />
+        <>
+          <div>
+            <Box
+              border={1}
+              borderColor="grey.500"
+              borderRadius={16}
+              component="nav"
+              m={1}
+            >
+              <span id="filter-tag">FILTROS</span>
+              <div className="sub-container-filters">
+                <div>
+                  <InputLabel>Preço:</InputLabel>
+                  <Slider
+                    value={priceRange}
+                    onChange={(e, newValue) => {
+                      setPriceRange(newValue);
+                    }}
+                    valueLabelDisplay="auto"
+                    aria-labelledby="range-slider"
+                    max={getBiggestPrice(vehicles)}
+                  />
+                </div>
+                <div>
+                  <InputLabel>Ano</InputLabel>
+                  <Slider
+                    value={yearRange}
+                    onChange={(e, newValue) => {
+                      setYearRange(newValue);
+                    }}
+                    valueLabelDisplay="auto"
+                    aria-labelledby="range-slider"
+                    min={getLowestYear(vehicles)}
+                    max={getBiggestYear(vehicles)}
+                  />
+                </div>
+              </div>
+              <div className="sub-container-filters">
+                <FormControl fullWidth>
+                  <InputLabel>Marca</InputLabel>
+
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={brand}
+                    onChange={(e) => setBrand(e.target.value)}
+                  >
+                    <MenuItem value="all">Todas</MenuItem>
+                    {allBrands.map((b) => {
+                      return (
+                        <MenuItem value={b} key={b}>
+                          {b}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+
+                <div>
+                  {vehicles.length !== toShowVehicles.length && (
+                    <Tooltip title="Resetar filtros">
+                      <IconButton aria-label="delete" onClick={resetFilters}>
+                        <IoIosCloseCircleOutline />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                </div>
+              </div>
+            </Box>
+
+            <FormControl className="search-container">
+              <div>
+                <InputLabel htmlFor="standard-adornment">Pesquisar</InputLabel>
+                <Input
+                  id="standard-adornment"
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <FaSearch color="#737373" />
+                    </InputAdornment>
+                  }
+                />
+              </div>
+            </FormControl>
+          </div>
+          <div className="order">
+            <FormControl>
+              <InputLabel>Veiculos por página:</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={vehiclesPerPage}
+                onChange={(e) => setVehiclesPerPage(e.target.value)}
+              >
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={12}>12</MenuItem>
+                <MenuItem value={20}>20</MenuItem>
+                <MenuItem value={24}>24</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <InputLabel>Ordenar por:</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={order}
+                onChange={(e) => setOrder(e.target.value)}
+              >
+                <MenuItem value={3}>Maior preço</MenuItem>
+                <MenuItem value={4}>Menor preço</MenuItem>
+                <MenuItem value={1}>Maior ano</MenuItem>
+                <MenuItem value={2}>Menor ano</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+
+          <CardsContainer
+            vehicles={toShowVehicles}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            vehiclesPerPage={vehiclesPerPage}
+          />
+        </>
       )}
     </StyledStock>
   );

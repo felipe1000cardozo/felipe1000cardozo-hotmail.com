@@ -35,7 +35,6 @@ const Routes = () => {
   useEffect(() => {
     firebase.isInitialized().then((resultado) => {
       setFirebaseInitialized(resultado);
-      console.log(firebaseInitialized);
     });
   }, []);
 

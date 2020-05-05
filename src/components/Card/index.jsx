@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { CarCard, Image, CardInfos, Price } from "./styles";
 import { Link } from "react-router-dom";
 import ButtonComponent from "../ButtonComponent";
@@ -8,6 +8,7 @@ const Card = ({ vehicle }) => {
   const { id, model, imgs, brand, year, km, price } = vehicle;
   const noImgUrl =
     "https://valordoconhecimento.fbitsstatic.net/img/p/produto-nao-possui-foto-no-momento/sem-foto.jpg?w=420&h=420&v=no-change";
+
   return (
     <CarCard key={id}>
       <h3>{model}</h3>

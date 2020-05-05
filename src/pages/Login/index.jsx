@@ -52,10 +52,6 @@ const Login = () => {
   //     alert(error.message);
   //   }
   // }
-  useEffect(() => {
-    console.log(firebase.getCurrent());
-    //firebase.logout();
-  }, []);
 
   async function login() {
     try {
@@ -67,10 +63,8 @@ const Login = () => {
           return null;
         }
       });
-      console.log(firebase.getCurrent());
       history.replace("/admin");
     } catch (error) {
-      console.log(error);
       alert(error.message);
     }
   }

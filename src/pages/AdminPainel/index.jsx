@@ -39,7 +39,8 @@ const AdminPainel = ({ history }) => {
 
   useEffect(() => {
     firebase.app.ref("vehicles").on("value", (snapshot) => {
-      setVehicles(snapshot.val());
+      console.log(typeof Object.values(snapshot.val()));
+      setVehicles(Object.values(snapshot.val()));
       setLoading(false);
     });
   }, []);
@@ -53,10 +54,17 @@ const AdminPainel = ({ history }) => {
     setNewVehicle((prevState) => ({ ...prevState, id: vehicles.length + 1 }));
   }, [vehicles]);
 
-  const registerNewVehicle = (event) => {
+  const registerNewVehicle = async (event) => {
     event.preventDefault();
 
-    firebase.app.ref("vehicles").child(vehicles.length).set(newVehicle);
+    let vehiclesDb = firebase.app.ref("vehicles");
+    let key = vehiclesDb.push().key;
+    console.log("key:" + key);
+    setNewVehicle((prevState) => ({
+      ...prevState,
+      id: key,
+    }));
+    await vehiclesDb.child(key).set({ ...newVehicle, id: key });
     setNewVehicle(defaultVehicle);
   };
 
@@ -71,11 +79,18 @@ const AdminPainel = ({ history }) => {
   };
 
   const uploadPhoto = async (e) => {
-    if (e.target.files.length) {
-      setNewImgs((prevState) => [
-        ...prevState,
-        ...Object.values(e.target.files),
-      ]);
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+
+      if (image.type === "image/png" || image.type === "image/jpeg") {
+        setNewImgs((prevState) => [
+          ...prevState,
+          ...Object.values(e.target.files),
+        ]);
+      } else {
+        alert("Envie uma imagem do tipo PNG ou JPEG");
+        return null;
+      }
     }
   };
 
@@ -100,7 +115,6 @@ const AdminPainel = ({ history }) => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setUploadImgProgress(progress);
-        console.log(progress);
       },
       (error) => {
         //error
@@ -108,7 +122,6 @@ const AdminPainel = ({ history }) => {
       },
       () => {
         //sucessO!
-        setUploadImgProgress(null);
         firebase.storage
           .ref(`imagesVehicles/${vehicles.length + 1}`)
           .child(newImgs[newImgs.length - 1].name)
@@ -119,6 +132,7 @@ const AdminPainel = ({ history }) => {
               imgs: [...prevState.imgs, url],
             }));
           });
+        setUploadImgProgress(null);
       }
     );
   };
@@ -196,7 +210,7 @@ const AdminPainel = ({ history }) => {
                         onChange={(event) => {
                           setNewVehicle({
                             ...newVehicle,
-                            price: event.target.value,
+                            price: Number(event.target.value),
                           });
                         }}
                       />
@@ -208,7 +222,7 @@ const AdminPainel = ({ history }) => {
                         onChange={(event) => {
                           setNewVehicle({
                             ...newVehicle,
-                            power: event.target.value,
+                            power: Number(event.target.value),
                           });
                         }}
                       />
@@ -233,7 +247,7 @@ const AdminPainel = ({ history }) => {
                         onChange={(event) => {
                           setNewVehicle({
                             ...newVehicle,
-                            km: event.target.value,
+                            km: Number(event.target.value),
                           });
                         }}
                       />
@@ -274,12 +288,9 @@ const AdminPainel = ({ history }) => {
                         <img src={vehicleImg} />
                       ))}
 
-                      {uploadImgProgress ? (
+                      {uploadImgProgress !== null ? (
                         <div className="uploading">
-                          <CircularProgress
-                            variant="determinate"
-                            value={uploadImgProgress}
-                          />
+                          <CircularProgress />
                         </div>
                       ) : (
                         <Tooltip title="Adicionar foto" placement="top">
@@ -289,7 +300,6 @@ const AdminPainel = ({ history }) => {
                               name="upload-photo-input"
                               id="upload-photo-input"
                               accept="image/png, image/jpeg"
-                              multiple
                               onChange={uploadPhoto}
                             />
                             <MdAddAPhoto size="35" />
@@ -315,6 +325,7 @@ const AdminPainel = ({ history }) => {
                       color="primary"
                       type="submit"
                       onClick={handleClose}
+                      disabled={uploadImgProgress}
                     >
                       Cadastrar
                     </Button>
