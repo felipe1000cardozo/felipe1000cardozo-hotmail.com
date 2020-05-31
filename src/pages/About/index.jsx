@@ -2,11 +2,13 @@ import React from "react";
 import { MainAbout } from "./styles";
 import ButtonComponent from "../../components/ButtonComponent";
 import { Link } from "react-router-dom";
+import HeaderPageComponent from "../../components/HeaderPageComponent";
 
 const About = () => {
   return (
     <MainAbout>
-      <h1>Empresa Lorem ipsum</h1>
+      <HeaderPageComponent title="Conheça nossa historia" />
+
       <h3>Conheça um pouco sobre nosa empresa</h3>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ex

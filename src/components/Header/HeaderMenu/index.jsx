@@ -12,8 +12,8 @@ const HeaderMenu = () => {
   return (
     <Header>
       <Place>
-        <FaMapMarkerAlt color="#fff" size="20" />
         <p>
+          <FaMapMarkerAlt color="#fff" size="20" />
           Rua {endereco.rua}, {endereco.numero} {endereco.complemento}
         </p>
       </Place>

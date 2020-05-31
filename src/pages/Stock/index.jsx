@@ -25,6 +25,7 @@ import ButtonComponent from "../../components/ButtonComponent";
 import { StyledStock } from "./styles";
 import firebase from "../../firebase";
 import PreLoader from "../../components/PreLoader";
+import HeaderPageComponent from "../../components/HeaderPageComponent";
 
 const Stock = () => {
   const [toShowVehicles, setToShowVehicles] = useState([]);
@@ -192,6 +193,7 @@ const Stock = () => {
         <PreLoader />
       ) : (
         <>
+          <HeaderPageComponent title="Nosso Estoque" />
           <div>
             <Box
               border={1}
@@ -309,7 +311,6 @@ const Stock = () => {
               </Select>
             </FormControl>
           </div>
-
           <CardsContainer
             vehicles={toShowVehicles}
             currentPage={currentPage}

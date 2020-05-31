@@ -12,25 +12,30 @@ export const Header = styled.header`
     font-weight: 500;
     padding: 7px;
   }
+  p {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const Place = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 50%;
   padding-left: 70px;
   background-color: var(--primary-color);
   position: relative;
-  &:after {
+  svg {
+    padding-right: 7px;
+  }
+  ::after {
     content: "";
-    height: 100%;
-    width: 50px;
-    background-color: inherit;
-    right: -21px;
-    position: absolute;
-    z-index: 1;
-    transform: skewX(230deg);
+    height: 0;
+    width: 0;
+    border: 20px solid;
+    border-color: var(--secoundary-color) var(--secoundary-color)
+      var(--primary-color) var(--primary-color);
   }
 `;
 
@@ -41,7 +46,7 @@ export const Contact = styled.div`
   padding-left: 115px;
   width: 50%;
   background-color: var(--secoundary-color);
-  box-shadow: inset 0px 4px 4px var(--primary-color);
+  /* box-shadow: inset 0px 4px 4px var(--primary-color); */
   a {
     display: block;
   }
