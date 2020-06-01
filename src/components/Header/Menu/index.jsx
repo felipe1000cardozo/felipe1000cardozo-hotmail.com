@@ -1,12 +1,27 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { ContainerMenu } from "./styles";
+import { useState } from "react";
 
 const Menu = ({ pathname }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+  const OpenMenu = () => {
+    setMenuOpen(true);
+  };
+
   return (
     <ContainerMenu>
-      <input type="checkbox" id="btn-menu" />
-      <label for="btn-menu">&#9776;</label>
+      <input type="checkbox" id="btn-menu" checked={menuOpen} />
+      <label
+        for="btn-menu"
+        onClick={() => (menuOpen ? closeMenu() : OpenMenu())}
+      >
+        &#9776;
+      </label>
 
       <div className="main-menu">
         <div className="image">
@@ -20,17 +35,29 @@ const Menu = ({ pathname }) => {
 
         <ul className="menu-list">
           <li>
-            <Link to={"/"} className={pathname === "/" && "active"}>
+            <Link
+              to={"/"}
+              className={pathname === "/" && "active"}
+              onClick={() => closeMenu()}
+            >
               HOME
             </Link>
           </li>
           <li>
-            <Link to={"/stock"} className={pathname === "/stock" && "active"}>
+            <Link
+              to={"/stock"}
+              className={pathname === "/stock" && "active"}
+              onClick={() => closeMenu()}
+            >
               ESTOQUE
             </Link>
           </li>
           <li>
-            <Link to={"/about"} className={pathname === "/about" && "active"}>
+            <Link
+              to={"/about"}
+              className={pathname === "/about" && "active"}
+              onClick={() => closeMenu()}
+            >
               SOBRE
             </Link>
           </li>
@@ -38,6 +65,7 @@ const Menu = ({ pathname }) => {
             <Link
               to={"/contact"}
               className={pathname === "/contact" && "active"}
+              onClick={() => closeMenu()}
             >
               CONTATO
             </Link>

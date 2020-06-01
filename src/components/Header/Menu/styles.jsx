@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ContainerMenu = styled.div`
   label[for="btn-menu"] {
     padding: 5px;
-    /* background-color: #222; */
     color: var(--secoundary-color);
     text-align: center;
     font-size: 30px;
@@ -81,8 +80,9 @@ export const ContainerMenu = styled.div`
     #btn-menu:checked ~ .main-menu {
       margin-top: 0;
       display: block;
-      transition: all 0.8s;
+      justify-content: flex-end;
     }
+
     .main-menu {
       margin-top: 5px;
       margin-top: -100%;
@@ -92,7 +92,7 @@ export const ContainerMenu = styled.div`
       margin-bottom: 12px;
     }
     .image {
-      display none;
+      display: none;
     }
   }
 `;
