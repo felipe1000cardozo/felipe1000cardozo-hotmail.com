@@ -22,7 +22,7 @@ export default createGlobalStyle`
    font-size: 14px;
    background-color: rgb(250,250,250);
    -webkit-font-smoothing: antialiased !important;
-   
+   overflow-x: hidden;
  }
  body, input, button{
    color: #222;
