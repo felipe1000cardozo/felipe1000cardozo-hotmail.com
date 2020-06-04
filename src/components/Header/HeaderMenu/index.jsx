@@ -3,7 +3,6 @@ import { Header } from "./styles";
 import { FaMapMarkerAlt, FaPhone, FaWhatsapp } from "react-icons/fa";
 import { RiFacebookCircleLine } from "react-icons/ri";
 import { FiInstagram } from "react-icons/fi";
-import { AiOutlineMail } from "react-icons/ai";
 
 import configInfos from "../../../configInfos.json";
 
