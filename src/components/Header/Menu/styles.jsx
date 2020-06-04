@@ -1,15 +1,22 @@
 import styled from "styled-components";
 
 export const ContainerMenu = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
   label[for="btn-menu"] {
-    padding: 5px;
-    color: var(--secoundary-color);
-    text-align: center;
+    padding: 5px 5px 0 5px;
+    background-color: rgba(250, 250, 250, 0.8);
+    text-align: end;
     font-size: 30px;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
+
+    width: 100%;
     display: none;
+    svg {
+      cursor: pointer;
+      color: var(--secoundary-color);
+    }
   }
 
   #btn-menu {
@@ -22,15 +29,10 @@ export const ContainerMenu = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    /* height: 85px; */
     background-color: rgba(250, 250, 250, 0.8);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    position: sticky;
-    top: 0;
-    z-index: 3;
 
     .image {
-      /* width: 50%; */
       margin-left: 50px;
 
       img {
@@ -50,13 +52,13 @@ export const ContainerMenu = styled.div`
       }
 
       a {
-        padding: 20px 20px;
+        padding: 10px 20px;
         text-decoration: none;
         font-size: 20;
         font-weight: 500;
         color: var(--third-color);
         display: block;
-        margin: 0 12px;
+        margin: 10px 12px;
       }
       a:hover {
         color: var(--secoundary-color);
@@ -69,7 +71,7 @@ export const ContainerMenu = styled.div`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     label[for="btn-menu"] {
       display: block;
     }
@@ -79,17 +81,16 @@ export const ContainerMenu = styled.div`
 
     #btn-menu:checked ~ .main-menu {
       margin-top: 0;
-      display: block;
-      justify-content: flex-end;
+      justify-content: center;
     }
 
     .main-menu {
       margin-top: 5px;
       margin-top: -100%;
-      transition: all 0.8s;
-      display: none;
+      transition: all 0.4s linear;
       text-align: center;
       margin-bottom: 12px;
+      justify-content: center;
     }
     .image {
       display: none;

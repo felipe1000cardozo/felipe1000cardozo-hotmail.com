@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Iframe from "../../components/IframeComponent/index";
 import CardContact from "../../components/CardContactComponent";
 import { MainCantact } from "./styles";

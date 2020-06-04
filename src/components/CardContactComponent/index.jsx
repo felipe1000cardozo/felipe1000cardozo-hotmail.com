@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
 import configInfos from "../../configInfos.json";
