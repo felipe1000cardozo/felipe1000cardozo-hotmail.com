@@ -1,34 +1,42 @@
 import styled from "styled-components";
 
-const AboutComponentStyled = styled.section`
+export const AboutComponentStyled = styled.section`
+  max-width: 1114px;
   width: 100%;
   display: flex;
-  justify-content: space-around;
   background-color: var(--four-color);
-  padding: 60px;
-  h3 {
-    padding: 40px 0;
-    text-align: center;
+  flex-wrap: wrap;
+  h3{
+  color: var(--secoundary-color);
+  margin-bottom: 12px;
+ }
+ @media (max-width: 767px) {
+    flex-direction: column;
   }
   .container {
-    width: 412px;
-  }
-  .container > div {
-    border: 2px solid #0375b4;
-  }
-  .container p {
-    padding: 9px;
-    font-size: 18px;
+    width: 50%;
+    padding: 30px;
+  div {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    svg{
+      padding-right: 5px;
+    }
+   p {
+    padding: 12px 0;
+    font-size: 14px;
+    display: flex;
+    color: var(--third-color);
   }
-  .container p a {
-    text-decoration: none;
-    color: #222;
+  .hour-container{
+    margin-top: 12px;
   }
-  img {
-    width: 100%;
-    height: 344px;
   }
+  @media (max-width: 767px) {
+    width:100%;
+    padding:30px 10px;
+h3{
+  font-size:12px;
+}
+ 
 `;
-export { AboutComponentStyled };
