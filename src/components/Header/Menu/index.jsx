@@ -7,22 +7,12 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const Menu = ({ pathname }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [iconMenu, setIconMenu] = useState(<GiHamburgerMenu />);
-
-  const turnInX = () => {
-    setIconMenu(<IoMdCloseCircleOutline />);
-  };
-  const turnInHamb = () => {
-    setIconMenu(<GiHamburgerMenu />);
-  };
 
   const closeMenu = () => {
     setMenuOpen(false);
-    turnInHamb();
   };
   const OpenMenu = () => {
     setMenuOpen(true);
-    turnInX();
   };
 
   return (
@@ -32,7 +22,7 @@ const Menu = ({ pathname }) => {
         for="btn-menu"
         onClick={() => (menuOpen ? closeMenu() : OpenMenu())}
       >
-        {iconMenu}
+        {menuOpen ? <IoMdCloseCircleOutline /> : <GiHamburgerMenu />}
       </label>
 
       <div className="main-menu">
