@@ -21,7 +21,6 @@ import getBiggestPrice from "../../ultils/getBiggestPrice";
 import getBiggestYear from "../../ultils/getBiggestYear";
 import getLowestYear from "../../ultils/getLowestYear";
 import CardsContainer from "../../components/CardsContainer";
-import ButtonComponent from "../../components/ButtonComponent";
 import { StyledStock } from "./styles";
 import firebase from "../../firebase";
 import PreLoader from "../../components/PreLoader";
