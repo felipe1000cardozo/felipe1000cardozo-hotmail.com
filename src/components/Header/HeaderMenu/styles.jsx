@@ -24,7 +24,6 @@ export const Header = styled.header`
     justify-content: center;
     width: 50%;
     z-index: 1;
-    /* box-shadow: inset 0px 4px 4px var(--primary-color); */
     a {
       display: block;
     }

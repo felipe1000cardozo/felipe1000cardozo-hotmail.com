@@ -1,8 +1,9 @@
 import React from "react";
 import { Header } from "./styles";
-import { FaMapMarkerAlt, FaPhone, FaWhatsapp } from "react-icons/fa";
+import { FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 import { RiFacebookCircleLine } from "react-icons/ri";
 import { FiInstagram } from "react-icons/fi";
+import { AiOutlinePhone } from "react-icons/ai";
 
 import configInfos from "../../../configInfos.json";
 
@@ -18,7 +19,7 @@ const HeaderMenu = () => {
       </div>
 
       <div className="contact">
-        <FaPhone color="#fff" size="17" />
+        <AiOutlinePhone color="#fff" size="20" />
         <a href={`tel:${telefone1}`}>{telefone1}</a>
 
         <FaWhatsapp color="#fff" size="20" />
