@@ -45,6 +45,7 @@ const Stock = () => {
 
 	useEffect(() => {
 		filterVehicles();
+		// eslint-disable-next-line
 	}, [brand, yearRange, priceRange]);
 
 	useEffect(() => {
