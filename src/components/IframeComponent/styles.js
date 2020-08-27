@@ -12,7 +12,7 @@ export const Main = styled.div`
 		border: none;
 	}
 
-	@media (max-width: 768px) {
-		margin: 0;
+	@media (max-width: 767px) {
+		margin: 12px;
 	}
 `;
