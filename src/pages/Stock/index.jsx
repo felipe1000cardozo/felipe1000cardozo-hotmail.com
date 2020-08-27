@@ -11,7 +11,6 @@ import {
 	Box,
 	Input,
 	InputAdornment,
-	Button,
 	IconButton,
 	Tooltip,
 } from '@material-ui/core';
@@ -77,6 +76,7 @@ const Stock = () => {
 				setYearRange([getLowestYear(vehicles), getBiggestYear(vehicles)]);
 				setLoading(false);
 			});
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
