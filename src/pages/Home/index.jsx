@@ -6,7 +6,6 @@ import Card from '../../components/Card';
 
 import AboutComponent from '../../components/AboutComponent';
 import { Cards } from './styles';
-import ButtonComponent from '../../components/ButtonComponent';
 
 import firebase from '../../firebase';
 import { Link } from 'react-router-dom';
