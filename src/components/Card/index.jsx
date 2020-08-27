@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { CarCard, Image, CardInfos, Price } from './styles';
 import { Link } from 'react-router-dom';
 import ButtonComponent from '../ButtonComponent';
