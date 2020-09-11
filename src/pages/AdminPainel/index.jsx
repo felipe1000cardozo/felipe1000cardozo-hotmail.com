@@ -34,32 +34,32 @@ const AdminPainel = ({ history }) => {
   const [vehicles, setVehicles] = useState({});
   const [newVehicle, setNewVehicle] = useState(defaultVehicle);
   const [loading, setLoading] = useState(true);
-  const [newImgs, setNewImgs] = useState([]);
+  // const [newImgs, setNewImgs] = useState([]);
   const [uploadImgProgress, setUploadImgProgress] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [key, setKey] = useState(Date.now());
 
   useEffect(() => {
     firebase.app.ref("vehicles").on("value", (snapshot) => {
-      console.log(typeof Object.values(snapshot.val()));
       setVehicles(Object.values(snapshot.val()));
       setLoading(false);
     });
   }, []);
+
+  // useEffect(() => {
+  //   if (open) {
+  //     setKey(Date.now);
+  //   }
+  // }, [open]);
 
   async function logout() {
     await firebase.logout().catch((error) => console.log(error));
     history.push("/");
   }
 
-  useEffect(() => {
-    setNewVehicle((prevState) => ({ ...prevState, id: vehicles.length + 1 }));
-  }, [vehicles]);
-
   const registerNewVehicle = async (event) => {
     event.preventDefault();
-
     let vehiclesDb = firebase.app.ref("vehicles");
-    let key = vehiclesDb.push().key;
-    console.log("key:" + key);
     setNewVehicle((prevState) => ({
       ...prevState,
       id: key,
@@ -68,25 +68,48 @@ const AdminPainel = ({ history }) => {
     setNewVehicle(defaultVehicle);
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
+    handleCancel();
     setOpen(false);
   };
 
-  const uploadPhoto = async (e) => {
+  const handleUploadPhoto = async (e) => {
     if (e.target.files[0]) {
       const image = e.target.files[0];
 
       if (image.type === "image/png" || image.type === "image/jpeg") {
-        setNewImgs((prevState) => [
-          ...prevState,
-          ...Object.values(e.target.files),
-        ]);
+        const uploadTasks = firebase.storage
+          .ref(`imagesVehicles/${key}/${image.name}`)
+          .put(image);
+
+        await uploadTasks.on(
+          "state_changed",
+          (snapshot) => {
+            //progress
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setUploadImgProgress(progress);
+          },
+          (error) => {
+            //error
+            console.log("Error imagem: " + error);
+          },
+          () => {
+            //sucessO!
+            firebase.storage
+              .ref(`imagesVehicles/${key}`)
+              .child(image.name)
+              .getDownloadURL()
+              .then((url) => {
+                setNewVehicle((prevState) => ({
+                  ...prevState,
+                  imgs: [...prevState.imgs, url],
+                }));
+              });
+            setUploadImgProgress(null);
+          }
+        );
       } else {
         alert("Envie uma imagem do tipo PNG ou JPEG");
         return null;
@@ -94,47 +117,61 @@ const AdminPainel = ({ history }) => {
     }
   };
 
-  useEffect(() => {
-    if (newImgs.length) {
-      handleUpload();
-    }
-  }, [newImgs]);
+  const handleCancel = async () => {
+    firebase.storage
+      .ref()
+      .child(`imagesVehicles/${key}`)
+      .listAll()
+      .then((a) => {
+        a.items.map((imgPath) => {
+          firebase.storage.ref().child(imgPath.location.path).delete();
+        });
+      });
 
-  const handleUpload = async () => {
-    const uploadTaks = firebase.storage
-      .ref(
-        `imagesVehicles/${newVehicle.id}/${newImgs[newImgs.length - 1].name}`
-      )
-      .put(newImgs[newImgs.length - 1]);
+    setNewVehicle(defaultVehicle);
+  };
 
-    await uploadTaks.on(
-      "state_changed",
-      (snapshot) => {
-        //progress
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setUploadImgProgress(progress);
-      },
-      (error) => {
-        //error
-        console.log("Error imagem: " + error);
-      },
-      () => {
-        //sucessO!
-        firebase.storage
-          .ref(`imagesVehicles/${vehicles.length + 1}`)
-          .child(newImgs[newImgs.length - 1].name)
-          .getDownloadURL()
-          .then((url) => {
-            setNewVehicle((prevState) => ({
-              ...prevState,
-              imgs: [...prevState.imgs, url],
-            }));
+  const deleteVehicle = (id) => {
+    const confirm = window.confirm("Excluir Vehiculo?");
+    if (confirm) {
+      firebase.app.ref("vehicles").child(id).remove();
+      firebase.storage
+        .ref()
+        .child(`imagesVehicles/${id}`)
+        .listAll()
+        .then((a) => {
+          a.items.map((imgPath) => {
+            firebase.storage.ref().child(imgPath.location.path).delete();
           });
-        setUploadImgProgress(null);
-      }
-    );
+        });
+    }
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+    setKey(Date.now);
+  };
+
+  const handleClickOpen = () => {
+    handleOpen();
+  };
+
+  const handleEditVehicle = (id) => {
+    handleOpen();
+    editVehicle(id);
+  };
+
+  const editVehicle = (id) => {
+    setKey(id);
+    firebase.app
+      .ref("vehicles")
+      .child(id)
+      .on("value", (snapshot) => {
+        if (snapshot.val()) {
+          setNewVehicle(snapshot.val());
+        }
+        // setLoading(false);
+      });
   };
 
   return (
@@ -300,7 +337,7 @@ const AdminPainel = ({ history }) => {
                               name="upload-photo-input"
                               id="upload-photo-input"
                               accept="image/png, image/jpeg"
-                              onChange={uploadPhoto}
+                              onChange={handleUploadPhoto}
                             />
                             <MdAddAPhoto size="35" />
                             <p>Somente JPG ou PNG</p>
@@ -324,8 +361,8 @@ const AdminPainel = ({ history }) => {
                       size="small"
                       color="primary"
                       type="submit"
-                      onClick={handleClose}
-                      disabled={uploadImgProgress}
+                      onClick={() => setOpen(false)}
+                      disabled={uploadImgProgress !== null}
                     >
                       Cadastrar
                     </Button>
@@ -342,7 +379,11 @@ const AdminPainel = ({ history }) => {
               Sair
             </Button>
           </div>
-          <VehiclesListComponent vehicles={vehicles} />
+          <VehiclesListComponent
+            vehicles={vehicles}
+            deleteVehicle={deleteVehicle}
+            editVehicle={handleEditVehicle}
+          />
         </StyledAdminPainel>
       )}
     </Fragment>

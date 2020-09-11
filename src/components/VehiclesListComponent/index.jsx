@@ -11,9 +11,17 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { StyledVehiclesList } from "./styles";
 
-const VehiclesListComponent = ({ vehicles }) => {
+const VehiclesListComponent = ({ vehicles, deleteVehicle, editVehicle }) => {
   const [search, setSearch] = useState("");
   useEffect(() => {}, []);
+
+  const handleDeleteVehicle = (id) => {
+    deleteVehicle(id);
+  };
+
+  const handleEditVehicle = (id) => {
+    editVehicle(id);
+  };
 
   return (
     <StyledVehiclesList>
@@ -82,12 +90,12 @@ const VehiclesListComponent = ({ vehicles }) => {
             </div>
             <div>
               <Tooltip title="Editar veículo" placement="top">
-                <button>
+                <button onClick={() => handleEditVehicle(vehicle.id)}>
                   <FiEdit size="20" />
                 </button>
               </Tooltip>
               <Tooltip title="Excluir veículo" placement="top">
-                <button>
+                <button onClick={() => handleDeleteVehicle(vehicle.id)}>
                   <RiDeleteBin6Line size="20" />
                 </button>
               </Tooltip>
