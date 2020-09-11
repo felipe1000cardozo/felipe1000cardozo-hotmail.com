@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const AboutComponentStyled = styled.section`
   max-width: 1114px;
@@ -9,7 +9,11 @@ export const AboutComponentStyled = styled.section`
   h3{
   color: var(--secoundary-color);
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
  }
+ 
  @media (max-width: 767px) {
     flex-direction: column;
   }

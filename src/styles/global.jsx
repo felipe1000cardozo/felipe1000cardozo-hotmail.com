@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   :root{
@@ -48,5 +48,15 @@ export default createGlobalStyle`
     color: var(--text-color);
     opacity: 0.8;
     font-weight:300;
+}
+.spacer-menu{
+  height: 31px;
+   width: 100%;
+   display: none; 
+}
+@media (max-width: 768px){
+  .spacer-menu{
+    display: block;
+  }
 }
 `;
