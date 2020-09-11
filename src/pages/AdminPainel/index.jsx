@@ -123,7 +123,7 @@ const AdminPainel = ({ history }) => {
       .listAll()
       .then((a) => {
         a.items.map((imgPath) => {
-          firebase.storage.ref().child(imgPath.location.path).delete();
+          return firebase.storage.ref().child(imgPath.location.path).delete();
         });
       });
 
@@ -140,7 +140,7 @@ const AdminPainel = ({ history }) => {
         .listAll()
         .then((a) => {
           a.items.map((imgPath) => {
-            firebase.storage.ref().child(imgPath.location.path).delete();
+            return firebase.storage.ref().child(imgPath.location.path).delete();
           });
         });
     }
