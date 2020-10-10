@@ -13,6 +13,7 @@ import { StyledVehiclesList } from "./styles";
 
 const VehiclesListComponent = ({ vehicles, deleteVehicle, editVehicle }) => {
   const [search, setSearch] = useState("");
+  const [filteredVehicles, setFilteredVehicles] = useState(vehicles);
   useEffect(() => {}, []);
 
   const handleDeleteVehicle = (id) => {
@@ -21,6 +22,18 @@ const VehiclesListComponent = ({ vehicles, deleteVehicle, editVehicle }) => {
 
   const handleEditVehicle = (id) => {
     editVehicle(id);
+  };
+
+  const handleFilter = (value) => {
+    setSearch(value);
+    setFilteredVehicles(
+      vehicles.filter((vehicle) => {
+        return (
+          vehicle.brand.toLowerCase().includes(value) ||
+          vehicle.plate.toLowerCase().includes(value)
+        );
+      })
+    );
   };
 
   return (
@@ -37,7 +50,7 @@ const VehiclesListComponent = ({ vehicles, deleteVehicle, editVehicle }) => {
                 id="standard-adornment"
                 type="text"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => handleFilter(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
                     <FaSearch color="#737373" />
@@ -69,8 +82,8 @@ const VehiclesListComponent = ({ vehicles, deleteVehicle, editVehicle }) => {
             <h4>Editar/Excluir</h4>
           </div>
         </div>
-        {vehicles.map((vehicle, index) => (
-          <div className="list-item">
+        {filteredVehicles.map((vehicle, index) => (
+          <div className="list-item" key={vehicle.id}>
             <div>
               <p>{index + 1}</p>
             </div>
